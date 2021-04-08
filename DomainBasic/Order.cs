@@ -7,7 +7,7 @@ namespace DomainBasic
     public class Order
     {
         public int OrderId;
-        public List<OrderItem> OrderItems;
+        public List<OrderItem> OrderItems = new List<OrderItem>();
 
     }
 }

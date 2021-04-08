@@ -8,10 +8,10 @@ namespace hw20.Models
 {
     public class ProductModel
     {
-        Product Product;
-        string modelInfo = "empty";
+        public Product Product;
+        public string modelInfo = "empty";
 
-        ProductModel(int Id)
+        public ProductModel(int Id)
         {
             this.Product = InMemRepo.ProductsRepo.Where(x => x.ProductId == Id).FirstOrDefault();
         }

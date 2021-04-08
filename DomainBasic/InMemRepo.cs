@@ -5,12 +5,14 @@ namespace DomainBasic
 {
     public static class InMemRepo
     {
-        public static List<Product> ProductsRepo;
-        public static List<Order> OrdersRepo;
-        public static List<OrderItem> OrderItemRepo;
+        public static List<Product> ProductsRepo = new List<Product>();
+        public static List<Order> OrdersRepo = new List<Order>();
+        public static List<OrderItem> OrderItemRepo = new List<OrderItem>();
 
         static InMemRepo()
         {
+
+
             ProductsRepo.Add(new Product()
             {
                 ProductId = 1,
@@ -22,8 +24,8 @@ namespace DomainBasic
 
             ProductsRepo.Add(new Product()
             {
-                ProductId = 1,
-                ProductBasicPrice = 100,
+                ProductId = 2,
+                ProductBasicPrice = 20,
                 ProductName = "Salt",
                 ImagePath = "~/Img/Products/Salt.png",
                 ProductDescription = "Pure chemical formula: NaCl"
