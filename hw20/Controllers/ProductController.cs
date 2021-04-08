@@ -18,7 +18,7 @@ namespace hw20.Controllers
         [Route("About/{ProductId:int}")]
         public IActionResult About(int ProductId)
         {
-            ProductModel model = new ProductModel(ProductId);
+            ProductViewModel model = new ProductViewModel(ProductId);
             return View(model);
             
 
