@@ -1,0 +1,35 @@
+﻿@model hw20.Models.ProductViewModel
+
+@{
+    ViewData["Title"] = "About";
+}
+<link rel="stylesheet" href="~/css/ProductInfo.css" />
+
+<h1>About</h1>
+
+<div>
+    <h4>Product Info:</h4>
+    <hr />
+    <dl class="row">
+    </dl>
+</div>
+
+<div>
+
+    <img class="ProductImage" src= "@Url.Content(Model.Product.ImagePath)" alt="Image" />
+    @*<p>ID: @Model.Product.ProductId</p>    *@
+    <p>Name: @Model.Product.ProductName</p>    
+    <p>Description: @Model.Product.ProductDescription</p>    
+   
+
+
+
+</div>
+
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+<script src="~/js/ProductInfo.js" asp-append-version="true"></script>

@@ -1,0 +1,47 @@
+﻿@model hw20.Models.ProdCatalogViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div>
+    <h4>ProdCatalogViewModel</h4>
+    <hr />
+    <dl class="row">
+    </dl>
+
+    <table id="prodCatTable" class="display">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var product in Model.Products){
+            <tr>
+                <td>@product.ProductId</td>
+                <td>@product.ProductName</td>
+                <td>@product.ProductDescription</td>
+                <td> 
+                    <a src="product/about/@product.ProductId" href="product/about/@product.ProductId" >View Details</a> 
+                    @*<link src="~/product/@product.ProductId"  >View Details</link> *@
+                </td>
+            </tr>
+        }
+        
+    </tbody>
+</table>
+
+</div>
+
+<script src="~/js/prodCatalog.js"  ></script>
+
+<div>
+@*    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>*@
+</div>
