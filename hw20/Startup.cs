@@ -36,7 +36,7 @@ namespace hw20
             app.UseSession();   // добавляем механизм работы с сессиями
 
 
-            
+            // добавляем мидлвейр инициации переменных сессии
             app.UseMiddleware<SessionVariablesMiddleware>();
 
             if (env.IsDevelopment())
@@ -64,6 +64,9 @@ namespace hw20
 
         }
 
+        /// <summary>
+        /// мидлвейр инициации переменных сессии
+        /// </summary>
         public class SessionVariablesMiddleware
         {
             private RequestDelegate _next;
@@ -73,14 +76,15 @@ namespace hw20
             }
             public async Task InvokeAsync(HttpContext context)
             {
+                // добавим пустую корзину если ее нет
                 if (!context.Session.Keys.Contains("Cart"))
                 {
 
                     Cart cart = new Cart();
                     context.Session.Set<Cart>("Cart", cart);
 
-
                 }
+                // идем по конвееру дальше
                 await _next.Invoke(context);
                 
             }

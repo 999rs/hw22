@@ -8,14 +8,18 @@ using System.Threading.Tasks;
 
 namespace hw20.Controllers
 {
+    /// <summary>
+    /// контроллер продукта
+    /// </summary>
     [Route("Product")]
     public class ProductController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
 
+        /// <summary>
+        /// информация о продукте
+        /// </summary>
+        /// <param name="ProductId"></param>
+        /// <returns></returns>
         [Route("ProductAbout/{ProductId:int}")]
         public IActionResult ProductAbout(int ProductId)
         {
@@ -26,16 +30,28 @@ namespace hw20.Controllers
         }
 
 
+        /// <summary>
+        /// добавление продукта в карзину
+        /// </summary>
+        /// <param name="ProductId">ид продукта</param>
+        /// <param name="Quantity">кол-во единиц</param>
+        /// <returns></returns>
         [Route("AddToCart/{ProductId:int}/{Quantity:int}")]
         public IActionResult AddToCart(int ProductId, int Quantity)
         {
 
             Cart cart = HttpContext.Session.Get<Cart>("Cart");
 
-            cart.CartOrderItems.Add(new OrderItem() { ProductId = ProductId, Quantity = Quantity });
+            if (cart.CartOrderItems.Exists(x => x.ProductId == ProductId))
+            {
+                cart.CartOrderItems.Where(x => x.ProductId == ProductId).FirstOrDefault().Quantity += Quantity;
+            }
+            else 
+                cart.CartOrderItems.Add(new OrderItem() { ProductId = ProductId, Quantity = Quantity });
 
             HttpContext.Session.Set<Cart>("Cart", cart);
 
+            //возвращаем на клиент результат добавления и информацию о корзине
             return new JsonResult(new {result = "ok", posCount = cart.CartOrderItems.Count, itemCount = cart.CartOrderItems.Sum(x => x.Quantity) });
         }
     }

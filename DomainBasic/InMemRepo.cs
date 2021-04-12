@@ -3,16 +3,23 @@ using System.Linq;
 
 namespace DomainBasic
 {
+    /// <summary>
+    /// класс репозитория 
+    /// </summary>
     public static class InMemRepo
     {
         public static List<Product> ProductsRepo = new List<Product>();
         public static List<Order> OrdersRepo = new List<Order>();
         public static List<OrderItem> OrderItemRepo = new List<OrderItem>();
 
+
+        /// <summary>
+        ///  конструктор и начальные данные
+        /// </summary>
         static InMemRepo()
         {
 
-
+            // хлеб
             ProductsRepo.Add(new Product()
             {
                 ProductId = 1,
@@ -22,6 +29,7 @@ namespace DomainBasic
                 ProductDescription = "White Bread"
             });
 
+            // соль
             ProductsRepo.Add(new Product()
             {
                 ProductId = 2,
@@ -31,6 +39,7 @@ namespace DomainBasic
                 ProductDescription = "Pure chemical formula: NaCl"
             });
 
+            // заказы
             OrderItemRepo.Add(new OrderItem() { OrderItemId = 1, ProductId = 1, Quantity = 2 });
             OrderItemRepo.Add(new OrderItem() { OrderItemId = 2, ProductId = 2, Quantity = 1 });
             OrderItemRepo.Add(new OrderItem() { OrderItemId = 3, ProductId = 1, Quantity = 5 });

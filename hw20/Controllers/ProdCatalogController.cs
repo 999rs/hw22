@@ -8,9 +8,16 @@ using System.Threading.Tasks;
 
 namespace hw20.Controllers
 {
+    /// <summary>
+    /// контроллер каталога
+    /// </summary>
     public class ProdCatalogController : Controller
     {
-        // GET: ProdCatalogController
+        
+        /// <summary>
+        /// просмотр каталога
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ProdCatView()
         {
             ProdCatalogViewModel model = new ProdCatalogViewModel();
