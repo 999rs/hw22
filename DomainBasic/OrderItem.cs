@@ -9,5 +9,6 @@ namespace DomainBasic
         public int OrderItemId;
         public int ProductId;
         public int Quantity;
+        public OrderItem(){ }
     }
 }

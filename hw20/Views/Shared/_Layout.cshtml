@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - hw20</title>
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" type="text/css" href="~/DataTables/datatables.min.css"/>
+
 </head>
 <body>
     <header>
@@ -24,16 +26,36 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ProdCatalog" asp-action="Index">ProdCatalog/Index</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ProdCatalog" asp-action="ProdCatView">ProdCatalog/Index</a>
                             
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Home/Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="CartView">Cart/index</a>
+                        </li>
                     </ul>
                 </div>
             </div>
+         
+    @{
+                int cartItemsItemsCount = 0;
+                int cartItemsPositionsCount = 0;
+                var cart = (Context.Session.Get<DomainBasic.Cart>("Cart") as DomainBasic.Cart);
+                if (cart != null)
+                {
+                     cartItemsPositionsCount = (Context.Session.Get<DomainBasic.Cart>("Cart") as DomainBasic.Cart).CartOrderItems.Count;
+                     cartItemsItemsCount = (Context.Session.Get<DomainBasic.Cart>("Cart") as DomainBasic.Cart).CartOrderItems.Sum(x=> x.Quantity);
+                }
+                
+        <a id="CartItemsLinkId" class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="CartView">In Cart: @cartItemsPositionsCount (@cartItemsItemsCount)</a>        
+    }
+                
+
+
         </nav>
+        
     </header>
     <div class="container">
         <main role="main" class="pb-3">

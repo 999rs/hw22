@@ -11,7 +11,7 @@ namespace hw20.Controllers
     public class ProdCatalogController : Controller
     {
         // GET: ProdCatalogController
-        public ActionResult Index()
+        public ActionResult ProdCatView()
         {
             ProdCatalogViewModel model = new ProdCatalogViewModel();
             return View(model);
