@@ -29,12 +29,8 @@ namespace hw20.Controllers
         [Route("AddToCart/{ProductId:int}/{Quantity:int}")]
         public IActionResult AddToCart(int ProductId, int Quantity)
         {
-            //Cart userCart = new Cart();
-            //if (ViewBag.Cart != null)
-            //    userCart = ViewBag.Cart as Cart;
 
             Cart cart = HttpContext.Session.Get<Cart>("Cart");
-
 
             cart.CartOrderItems.Add(new OrderItem() { ProductId = ProductId, Quantity = Quantity });
 

@@ -36,8 +36,8 @@ namespace hw20
             app.UseSession();   // добавляем механизм работы с сессиями
 
 
-            //app.UseMiddleware<RouterMiddleware>();
-            app.UseMiddleware<AuthenticationMiddleware>();
+            
+            app.UseMiddleware<SessionVariablesMiddleware>();
 
             if (env.IsDevelopment())
             {
@@ -64,10 +64,10 @@ namespace hw20
 
         }
 
-        public class AuthenticationMiddleware
+        public class SessionVariablesMiddleware
         {
             private RequestDelegate _next;
-            public AuthenticationMiddleware(RequestDelegate next)
+            public SessionVariablesMiddleware(RequestDelegate next)
             {
                 _next = next;
             }
@@ -85,56 +85,6 @@ namespace hw20
                 
             }
         }
-
-        //public async void dddAsync(HttpContext context)
-        //{
-        //    await Task.Run(async () =>
-        //    {
-
-        //        await Task.Run(() =>
-        //        {
-
-        //            if (!context.Session.Keys.Contains("Cart"))
-        //            {
-
-        //                Cart cart = new Cart();
-        //                context.Session.Set<Cart>("Cart", cart);
-
-
-        //            }
-
-
-        //        });
-        //    });
-        //}
-
-
-        //public class RoutingMiddleware
-        //{
-        //    private readonly RequestDelegate _next;
-        //    public RoutingMiddleware(RequestDelegate next)
-        //    {
-        //        _next = next;
-        //    }
-
-        //    public async Task InvokeAsync(HttpContext context)
-        //    {
-
-
-
-        //                if (!context.Session.Keys.Contains("Cart"))
-        //                {
-
-        //                    Cart cart = new Cart();
-        //                    context.Session.Set<Cart>("Cart", cart);
-
-
-        //                }
-        //        await _next.Invoke(context);
-
-        //        //await _next.Invoke(context);
-        //    }
-        //}
 
     }
 }
