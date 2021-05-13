@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Img\Products\" />
+    <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
 
 </Project>

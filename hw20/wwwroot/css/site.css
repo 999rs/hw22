@@ -1,10 +1,15 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+.LogoSvg {
+    width: 80px;
+}
+
+
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
@@ -18,10 +23,15 @@ a {
   border-color: #1861ac;
 }
 
+.nav-link {
+    white-space: nowrap;
+}
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+    
 }
 
 /* Sticky footer styles
@@ -68,4 +78,26 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+
+/* Custom tile styles */
+.tile-item {
+display:inline-block;
+background-color:darkgray;
+width:200px;
+height:200px;
+border:solid;
+border-radius:5px;
+
+}
+/*
+.li-service-icon {
+    width: 40px;
+    background-image: url('../Img/bread.png');
+}*/
+
+.li-service-img {
+width:40px;
+/*display:block;*/
 }

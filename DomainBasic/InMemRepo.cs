@@ -39,7 +39,7 @@ namespace DomainBasic
                 ProductDescription = "Pure chemical formula: NaCl"
             });
 
-            // заказы
+
             OrderItemRepo.Add(new OrderItem() { OrderItemId = 1, ProductId = 1, Quantity = 2 });
             OrderItemRepo.Add(new OrderItem() { OrderItemId = 2, ProductId = 2, Quantity = 1 });
             OrderItemRepo.Add(new OrderItem() { OrderItemId = 3, ProductId = 1, Quantity = 5 });
