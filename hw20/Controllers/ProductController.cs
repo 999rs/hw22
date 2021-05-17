@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace hw20.Controllers
@@ -52,7 +53,13 @@ namespace hw20.Controllers
             HttpContext.Session.Set<Cart>("Cart", cart);
 
             //возвращаем на клиент результат добавления и информацию о корзине
-            return new JsonResult(new {result = "ok", posCount = cart.CartOrderItems.Count, itemCount = cart.CartOrderItems.Sum(x => x.Quantity) });
+            return new JsonResult(new
+            {
+                result = "ok",
+                posCount = cart.CartOrderItems.Count,
+                itemCount = cart.CartOrderItems.Sum(x => x.Quantity),
+                thisItemNewCount = cart.CartOrderItems.Where(x => x.ProductId == ProductId).Count()
+            }) ;
         }
     }
 }

@@ -39,6 +39,32 @@ namespace DomainBasic
                 ProductDescription = "Pure chemical formula: NaCl"
             });
 
+            ProductsRepo.Add(new Product()
+            {
+                ProductId = 3,
+                ProductBasicPrice = 100,
+                ProductName = "virezkaFront",
+                ImagePath = "~/Img/Products/virezkaFront.jpg",
+                ProductDescription = "virezkaFront tasty fresh"
+            });
+
+            ProductsRepo.Add(new Product()
+            {
+                ProductId = 4,
+                ProductBasicPrice = 100,
+                ProductName = "virezkaLeft",
+                ImagePath = "~/Img/Products/virezkaLeft.jpg",
+                ProductDescription = "virezkaLeft tasty fresh best part"
+            });
+            ProductsRepo.Add(new Product()
+            {
+                ProductId = 5,
+                ProductBasicPrice = 100,
+                ProductName = "virezkaMiddle",
+                ImagePath = "~/Img/Products/virezkaMiddle.jpg",
+                ProductDescription = "virezkaMiddle all new extra meat"
+            });
+
 
             OrderItemRepo.Add(new OrderItem() { OrderItemId = 1, ProductId = 1, Quantity = 2 });
             OrderItemRepo.Add(new OrderItem() { OrderItemId = 2, ProductId = 2, Quantity = 1 });

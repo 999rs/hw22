@@ -3,6 +3,7 @@ for details on configuring this project to bundle and minify static web assets. 
 
 .LogoSvg {
     width: 80px;
+    margin-right: 20px;
 }
 
 
@@ -39,7 +40,7 @@ a {
 html {
   font-size: 14px;
 }
-@media (min-width: 768px) {
+@media (min-width: 400px) {
   html {
     font-size: 16px;
   }
