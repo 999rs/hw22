@@ -25,7 +25,7 @@ namespace DomainBasic
                 ProductId = 1,
                 ProductBasicPrice = 100,
                 ProductName = "Хлеб",
-                ImagePath = "~/Img/Products/Bread.png",
+                ImagePath = "~/Img/Products/Bread.jpg",
                 ProductDescription = "Белый хлеб собственной выпечки. Изготовлен из лучших продуктов в лучших традициях пекарного дела."
             });
 
@@ -35,7 +35,7 @@ namespace DomainBasic
                 ProductId = 2,
                 ProductBasicPrice = 20,
                 ProductName = "Соль",
-                ImagePath = "~/Img/Products/Salt.png",
+                ImagePath = "~/Img/Products/Salt.jpg",
                 ProductDescription = "Природная соль без искуственных добавок."
             });
 

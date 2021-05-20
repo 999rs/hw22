@@ -23,29 +23,28 @@
             <div class="container">
                 
 
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img class="LogoSvg" src ="~/img/LogoRocketcorn.svg" alt="Голень Единорога - мясная лавка" />
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" title="Голень Единорога - мясная лавка">
+                    <img class="LogoSvg" src ="~/img/LogoRocketcorn.svg" alt="Логотип компании" />
                 </a>
 @*                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>*@
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="navbar-collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ProdCatalog" asp-action="ProdCatView">ProdCatalog/ProdCatView</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ProdCatalog" asp-action="ProdCatView" title="ProdCatalog/ProdCatView" >Каталог</a>
                             
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Home/Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark"  asp-area="" asp-controller="Cart" asp-action="CartView">Cart/CartView</a>
-                        </li>
+@*                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy" title="Home/Privacy">Конфиденциальность</a>
+                        </li>*@
+@*                        <li class="nav-item">
+                            <a class="nav-link text-dark"  asp-area="" asp-controller="Cart" asp-action="CartView" title="Cart/CartView">Корзина</a>
+                        </li>*@
                     </ul>
                 </div>
-            </div>
-         
+        
     @{
                 int cartItemsItemsCount = 0;
                 int cartItemsPositionsCount = 0;
@@ -56,8 +55,16 @@
                      cartItemsItemsCount = (Context.Session.Get<DomainBasic.Cart>("Cart") as DomainBasic.Cart).CartOrderItems.Sum(x=> x.Quantity);
                 }
                 
-        <a id="CartItemsLinkId" class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="CartView">In Cart: @cartItemsPositionsCount (@cartItemsItemsCount)</a>        
-    }
+    }            
+            
+            <a id="CartItemsLinkId" class="nav-link text-dark" 
+                                    asp-area="" asp-controller="Cart" 
+                                    asp-action="CartView"
+                                    title="В корзине @cartItemsPositionsCount наименований @cartItemsItemsCount элементов">В корзине: @cartItemsPositionsCount (@cartItemsItemsCount)</a>        
+            
+            </div>
+         
+
                 
 
 
