@@ -1,0 +1,63 @@
+﻿@using DomainBasic;
+@using Microsoft.AspNetCore.Http
+@model CartViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div>
+    <h4>Cart</h4>
+    <hr />
+    <dl class="row">
+    </dl>
+    @if (Model.Cart.CartOrderItems.Count == 0)
+            {
+             <h4>Your cart is empty</h4>
+            }
+        
+    else
+        {
+            <ul class="CartList">
+                @foreach (var prod in Model.Cart.CartOrderItems)
+                {
+                    var product = @InMemRepo.ProductsRepo.Where(x => x.ProductId == prod.ProductId).FirstOrDefault();
+                    if (product != null)
+                    {
+                        <li class="CartListItem">
+                            <img class="CartProductImage" src= "@Url.Content(product.ImagePath)" alt="@product.ProductName">
+                            <p class="CartProductName">@InMemRepo.ProductsRepo.Where(x=> x.ProductId == prod.ProductId).FirstOrDefault().ProductName</p>
+                            @*<p>Quantity: @prod.Quantity</p>*@
+                            <div class="CartItemsActions">
+                                <button class="productButton" href="#" onclick="addProductToCart(@product.ProductId, 1)">+</button>
+                                <span id="itemCartSpan_@product.ProductId" class="itemCartSpan">
+                                    @Model.Cart.CartOrderItems.Where(x => x.ProductId == product.ProductId).FirstOrDefault()?.Quantity
+                                </span>
+                                <button class="productButton" href="#" onclick="addProductToCart(@product.ProductId, -1)">-</button>
+                            </div>
+                        </li>
+                    }
+                    else { 
+                           <li> 
+                                <p>Продукт не найден</p>  
+                           </li> 
+                    }; 
+                        
+            
+                @*<p>Quantity: @prod.Quantity</p>*@
+            
+                 }    
+                
+            </ul>
+        }
+    
+
+</div>
+
+<script src="~/js/Cart.js"  ></script>
+@*<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>*@

@@ -1,0 +1,151 @@
+﻿* {
+box-sizing:border-box;
+}
+
+html {
+font-family:sans-serif;
+}
+
+
+.ProductImage {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    min-width: 100%;
+    max-width: 100%;
+
+}
+
+
+.container {
+max-width:100%;
+margin-left:auto;
+margin-right:auto;
+}
+
+ul {
+    list-style:none;
+}
+
+.text-center {
+    text-align:center;
+}
+
+.productList {
+    padding-inline-start: 0px;
+    justify-content: space-evenly;
+    display: grid;
+    flex-direction: column;    
+    background: whitesmoke;    
+    grid-template-columns: repeat( auto-fit, 200px );
+    min-width:220px;
+}
+
+.prodListItem {
+    width: 200px;
+    border: solid;
+    margin: 9px;
+    border-color: darkgrey;
+    border-radius: 15px;   
+    display: flex;
+    flex-direction: column;
+}
+
+.prodListItem:not(:last-child) {
+    margin-right:30px;
+}
+
+.productItemDescr {
+    padding: 5px; 
+    font-size: smaller;
+    overflow: hidden;
+    text-overflow: ellipsis;    
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.catalogListBlock {
+    /*max-height:1000px;*/
+}
+
+.productButton {
+
+    height: 30px;
+    /* display: inline-block; */
+    align-self: center;
+}
+
+.itemCartBtn {
+    width: 40px;
+    height: 40px;
+    background-image: url(../img/cart-icon.png);
+    background-size: cover;
+    display: inline-block;
+}
+.productItemActions {
+    display: flex;
+    align-content: center;
+    justify-content: space-evenly;
+    margin-top: auto;
+}
+
+.itemCartSpan {
+    width: 40px;
+    height: 40px;
+    background-image: url(../img/cart-icon.png);
+    display: inline-block;
+    background-size: cover;
+    text-align: center;
+    line-height: 50px;
+    font-family: cursive;
+    color: royalblue;
+}
+
+.CartList {
+}
+
+.CartListItem {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.CartProductImage {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    
+    max-width: 100%;
+}
+
+.CartProductName {
+    align-self: center;
+    min-width: 60px;
+    text-align: center;
+}
+
+.CartItemsActions {
+    align-self: center;
+    min-width: fit-content;
+}
+
+.productButton {
+   
+    height: 30px;
+    
+    align-self: center;
+}
+
+.itemCartSpan {
+    width: 40px;
+    height: 40px;
+    background-image: url(../img/cart-icon.png);
+    display: inline-block;
+    background-size: cover;
+    text-align: center;
+    line-height: 50px;
+    font-family: cursive;
+    color: royalblue;
+}
+
