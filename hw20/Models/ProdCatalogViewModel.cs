@@ -16,6 +16,11 @@ namespace hw20.Models
         /// </summary>
         public List<Product> Products = new List<Product>();
 
+        /// <summary>
+        /// Корзина
+        /// </summary>
+        public Cart Cart = new Cart();
+
         public ProdCatalogViewModel()
         {
             Products = InMemRepo.ProductsRepo;

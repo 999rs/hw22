@@ -24,9 +24,9 @@ namespace DomainBasic
             {
                 ProductId = 1,
                 ProductBasicPrice = 100,
-                ProductName = "Bread",
+                ProductName = "Хлеб",
                 ImagePath = "~/Img/Products/Bread.png",
-                ProductDescription = "White Bread"
+                ProductDescription = "Белый хлеб собственной выпечки. Изготовлен из лучших продуктов в лучших традициях пекарного дела."
             });
 
             // соль
@@ -34,35 +34,35 @@ namespace DomainBasic
             {
                 ProductId = 2,
                 ProductBasicPrice = 20,
-                ProductName = "Salt",
+                ProductName = "Соль",
                 ImagePath = "~/Img/Products/Salt.png",
-                ProductDescription = "Pure chemical formula: NaCl"
+                ProductDescription = "Природная соль без искуственных добавок."
             });
 
             ProductsRepo.Add(new Product()
             {
                 ProductId = 3,
                 ProductBasicPrice = 100,
-                ProductName = "virezkaFront",
+                ProductName = "Юникорн Спешиал",
                 ImagePath = "~/Img/Products/virezkaFront.jpg",
-                ProductDescription = "virezkaFront tasty fresh"
+                ProductDescription = "Фирменная вырезка Юникорн Спешиал. Ароматное мясо к вашему столу!"
             });
 
             ProductsRepo.Add(new Product()
             {
                 ProductId = 4,
                 ProductBasicPrice = 100,
-                ProductName = "virezkaLeft",
+                ProductName = "Левая голень",
                 ImagePath = "~/Img/Products/virezkaLeft.jpg",
-                ProductDescription = "virezkaLeft tasty fresh best part"
+                ProductDescription = "Вырезка левой голени. Превосходный вкус! Ноль калорий!"
             });
             ProductsRepo.Add(new Product()
             {
                 ProductId = 5,
                 ProductBasicPrice = 100,
-                ProductName = "virezkaMiddle",
+                ProductName = "Правая голень",
                 ImagePath = "~/Img/Products/virezkaMiddle.jpg",
-                ProductDescription = "virezkaMiddle all new extra meat"
+                ProductDescription = "Вырезка правой голени. Богата клетчаткой!"
             });
 
 

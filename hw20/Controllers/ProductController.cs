@@ -41,6 +41,7 @@ namespace hw20.Controllers
         public IActionResult AddToCart(int ProductId, int Quantity)
         {
 
+            // получим состав корзины из сессии
             Cart cart = HttpContext.Session.Get<Cart>("Cart");
 
             if (cart.CartOrderItems.Exists(x => x.ProductId == ProductId))
@@ -50,6 +51,9 @@ namespace hw20.Controllers
             else 
                 cart.CartOrderItems.Add(new OrderItem() { ProductId = ProductId, Quantity = Quantity });
 
+            // уберем позиции с нулевым значением количества
+            cart.CartOrderItems.RemoveAll(x => x.Quantity <= 0);
+
             HttpContext.Session.Set<Cart>("Cart", cart);
 
             //возвращаем на клиент результат добавления и информацию о корзине
@@ -58,7 +62,7 @@ namespace hw20.Controllers
                 result = "ok",
                 posCount = cart.CartOrderItems.Count,
                 itemCount = cart.CartOrderItems.Sum(x => x.Quantity),
-                thisItemNewCount = cart.CartOrderItems.Where(x => x.ProductId == ProductId).Count()
+                thisItemNewCount = cart.CartOrderItems.Where(x => x.ProductId == ProductId).FirstOrDefault()?.Quantity
             }) ;
         }
     }
