@@ -103,6 +103,7 @@ ul {
 }
 
 .CartList {
+    max-width: 700px;
 }
 
 .CartListItem {
