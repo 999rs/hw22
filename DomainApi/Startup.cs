@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EFRepository;
 
 namespace DomainApi
 {
@@ -29,8 +30,11 @@ namespace DomainApi
             // получаем строку подключения из файла конфигурации
             string connection = Configuration.GetConnectionString("DefaultConnection");
             // добавляем контекст MobileContext в качестве сервиса в приложение
-            services.AddDbContext<DomainContext>(options =>
-                options.UseSqlServer(connection));
+
+            //services.AddDbContext<EFRepository.DataContext>(options =>
+            //    options.UseSqlServer(connection));
+            services.AddDbContext<EFRepository.DataContext>();
+
 
             services.AddControllers();
         }
