@@ -15,34 +15,39 @@ namespace DomainBasic
         /// <summary>
         /// ид продукта
         /// </summary>
-        [Key]
-        public int ProductId;
+
+        public int Id {get;set;}
         //public int key;
 
         /// <summary>
         /// имя продукта 
         /// </summary>
+        [Required]
         public string ProductName { get; set; }
 
         /// <summary>
         /// описание продукта
         /// </summary>
+        [Required]
         public string ProductDescription { get; set; }
 
         /// <summary>
         /// базовая цена продукта
         /// </summary>
+        [Required]
         public double ProductBasicPrice { get; set; }
 
 
         /// <summary>
         /// путь к картинке продукта
         /// </summary>
+        [Required]
         public string ImagePath { get; set; }
 
         /// <summary>
         /// храним картинку в бд
         /// </summary>
-        public byte[] ImageData { get; set; }
+        //[Required]
+        //public byte[] ImageData { get; set; }
     }
 }

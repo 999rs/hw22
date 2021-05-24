@@ -23,19 +23,19 @@
             <ul class="CartList">
                 @foreach (var prod in Model.Cart.CartOrderItems)
                 {
-                    var product = @InMemRepo.ProductsRepo.Where(x => x.ProductId == prod.ProductId).FirstOrDefault();
+                    var product = @InMemRepo.ProductsRepo.Where(x => x.Id == prod.ProductId).FirstOrDefault();
                     if (product != null)
                     {
                         <li class="CartListItem">
                             <img class="CartProductImage" src= "@Url.Content(product.ImagePath)" alt="@product.ProductName">
-                            <p class="CartProductName">@InMemRepo.ProductsRepo.Where(x=> x.ProductId == prod.ProductId).FirstOrDefault().ProductName</p>
+                            <p class="CartProductName">@InMemRepo.ProductsRepo.Where(x=> x.Id == prod.ProductId).FirstOrDefault().ProductName</p>
                             @*<p>Quantity: @prod.Quantity</p>*@
                             <div class="CartItemsActions">
-                                <button class="productButton" href="#" onclick="addProductToCart(@product.ProductId, 1)">+</button>
-                                <span id="itemCartSpan_@product.ProductId" class="itemCartSpan">
-                                    @Model.Cart.CartOrderItems.Where(x => x.ProductId == product.ProductId).FirstOrDefault()?.Quantity
+                                <button class="productButton" href="#" onclick="addProductToCart(@product.Id, 1)">+</button>
+                                <span id="itemCartSpan_@product.Id" class="itemCartSpan">
+                                    @Model.Cart.CartOrderItems.Where(x => x.ProductId == product.Id).FirstOrDefault()?.Quantity
                                 </span>
-                                <button class="productButton" href="#" onclick="addProductToCart(@product.ProductId, -1)">-</button>
+                                <button class="productButton" href="#" onclick="addProductToCart(@product.Id, -1)">-</button>
                             </div>
                         </li>
                     }

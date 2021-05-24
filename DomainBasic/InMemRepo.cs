@@ -22,7 +22,7 @@ namespace DomainBasic
             // хлеб
             ProductsRepo.Add(new Product()
             {
-                ProductId = 1,
+                Id = 1,
                 ProductBasicPrice = 100,
                 ProductName = "Хлеб",
                 ImagePath = "~/Img/Products/Bread.jpg",
@@ -32,7 +32,7 @@ namespace DomainBasic
             // соль
             ProductsRepo.Add(new Product()
             {
-                ProductId = 2,
+                Id = 2,
                 ProductBasicPrice = 20,
                 ProductName = "Соль",
                 ImagePath = "~/Img/Products/Salt.jpg",
@@ -41,7 +41,7 @@ namespace DomainBasic
 
             ProductsRepo.Add(new Product()
             {
-                ProductId = 3,
+                Id = 3,
                 ProductBasicPrice = 100,
                 ProductName = "Юникорн Спешиал",
                 ImagePath = "~/Img/Products/virezkaFront.jpg",
@@ -50,7 +50,7 @@ namespace DomainBasic
 
             ProductsRepo.Add(new Product()
             {
-                ProductId = 4,
+                Id = 4,
                 ProductBasicPrice = 100,
                 ProductName = "Левая голень",
                 ImagePath = "~/Img/Products/virezkaLeft.jpg",
@@ -58,7 +58,7 @@ namespace DomainBasic
             });
             ProductsRepo.Add(new Product()
             {
-                ProductId = 5,
+                Id = 5,
                 ProductBasicPrice = 100,
                 ProductName = "Правая голень",
                 ImagePath = "~/Img/Products/virezkaMiddle.jpg",

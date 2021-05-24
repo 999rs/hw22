@@ -19,7 +19,7 @@ namespace hw20.Models
 
         public ProductViewModel(int Id)
         {
-            this.Product = InMemRepo.ProductsRepo.Where(x => x.ProductId == Id).FirstOrDefault();
+            this.Product = InMemRepo.ProductsRepo.Where(x => x.Id == Id).FirstOrDefault();
         }
     }
 }

@@ -27,11 +27,11 @@
             <p class="productItemDescr" title="@product.ProductDescription">@product.ProductDescription</p>
 
             <div class="productItemActions">
-                <button class="productButton" href="#" onclick="addProductToCart(@product.ProductId, 1)">+</button>
-                <span id="itemCartSpan_@product.ProductId" class="itemCartSpan">
-                            @Model.Cart.CartOrderItems.Where(x => x.ProductId == product.ProductId).FirstOrDefault()?.Quantity
+                <button class="productButton" href="#" onclick="addProductToCart(@product.Id, 1)">+</button>
+                <span id="itemCartSpan_@product.Id" class="itemCartSpan">
+                            @Model.Cart.CartOrderItems.Where(x => x.ProductId == product.Id).FirstOrDefault()?.Quantity
                 </span>
-                <button class="productButton" href="#" onclick="addProductToCart(@product.ProductId, -1)">-</button>
+                <button class="productButton" href="#" onclick="addProductToCart(@product.Id, -1)">-</button>
                 @*<input type="button" value="Add to Cart" href="#" onclick="addProductToCart(@product.ProductId, 1)" />*@
                 @*<button class="itemCartBtn"></button>*@
                 

@@ -25,7 +25,6 @@
   <ItemGroup>
     <ProjectReference Include="..\DomainBasic\DomainBasic.csproj" />
     <ProjectReference Include="..\EFRepository\EFRepository.csproj" />
-    <ProjectReference Include="..\hw20\hw20.csproj" />
   </ItemGroup>
 
 
