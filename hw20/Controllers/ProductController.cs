@@ -1,4 +1,5 @@
 ﻿using DomainBasic;
+using EFRepository;
 using hw20.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+
 
 namespace hw20.Controllers
 {
@@ -15,6 +17,12 @@ namespace hw20.Controllers
     [Route("Product")]
     public class ProductController : Controller
     {
+        private readonly DataContext _context;
+
+        public ProductController(DataContext context)
+        {
+            _context = context;
+        }
 
         /// <summary>
         /// информация о продукте
@@ -65,5 +73,7 @@ namespace hw20.Controllers
                 thisItemNewCount = cart.CartOrderItems.Where(x => x.ProductId == ProductId).FirstOrDefault()?.Quantity
             }) ;
         }
+
+
     }
 }

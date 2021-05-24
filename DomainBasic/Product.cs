@@ -15,7 +15,6 @@ namespace DomainBasic
         /// <summary>
         /// ид продукта
         /// </summary>
-
         public int Id {get;set;}
         //public int key;
 
@@ -47,7 +46,7 @@ namespace DomainBasic
         /// <summary>
         /// храним картинку в бд
         /// </summary>
-        //[Required]
-        //public byte[] ImageData { get; set; }
+        [Required]
+        public byte[] ImageData { get; set; }
     }
 }
