@@ -31,9 +31,9 @@ namespace DomainApi
             string connection = Configuration.GetConnectionString("DefaultConnection");
             // добавляем контекст MobileContext в качестве сервиса в приложение
 
-            //services.AddDbContext<EFRepository.DataContext>(options =>
-            //    options.UseSqlServer(connection));
-            services.AddDbContext<EFRepository.DataContext>();
+            services.AddDbContext<EFRepository.DataContext>(options =>
+                options.UseSqlServer(connection));
+            //services.AddDbContext<EFRepository.DataContext>();
 
 
             services.AddControllers();
@@ -46,6 +46,7 @@ namespace DomainApi
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 
