@@ -32,7 +32,8 @@ namespace hw20.Controllers
         [Route("ProductAbout/{ProductId:int}")]
         public IActionResult ProductAbout(int ProductId)
         {
-            ProductViewModel model = new ProductViewModel(ProductId);
+            Product product = _context.Products.Where(p => p.Id == ProductId).FirstOrDefault();
+            ProductViewModel model = new ProductViewModel(product);
             return View(model);
             
 
