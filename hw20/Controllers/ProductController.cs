@@ -4,6 +4,7 @@ using hw20.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
@@ -19,9 +20,14 @@ namespace hw20.Controllers
     {
         private readonly DataContext _context;
 
+        IRepository db;
+        
+
+
         public ProductController(DataContext context)
         {
             _context = context;
+            db = new SQLRepository();
         }
 
         /// <summary>
@@ -38,6 +44,51 @@ namespace hw20.Controllers
 
 
         }
+
+        [Route("NewProduct")]
+        [HttpGet]
+        public IActionResult NewProduct()
+        {
+            var model = new ProductViewModel();
+            return View(model);
+        
+        }
+
+        [Route("NewProduct")]
+        [HttpPost]
+        public IActionResult NewProduct( [Bind("Product,Upload")] ProductViewModel formModel)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                formModel.Upload.CopyTo(ms);
+                formModel.Product.ImageData = ms.ToArray();
+            }
+
+            ModelState.Clear();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    db.Create(formModel.Product);
+                    db.Save();
+                    //_context.Add(formModel.Product);
+                    //_context.SaveChanges();
+
+                    var folderPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products");
+                    db.DownloadProdImages(folderPath);
+                }
+                catch (Exception e)
+                { 
+                    
+                }
+
+            }
+            return RedirectToAction("ProdCatView", "ProdCatalog");
+
+        }
+
+
+
 
 
         /// <summary>
