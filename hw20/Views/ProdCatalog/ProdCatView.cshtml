@@ -15,7 +15,7 @@
     <ul id="productList" class="productList">
     @foreach(var product in Model.Products)
     {
-        <li class="prodListItem">
+        <li class="prodListItem" id="ProdCardId_@product.Id">
             <div class="productNameBlock">
                 <strong class="productItemName" title="@product.ProductName">@product.ProductName</strong>
                 <div class="prodEditActions">
@@ -44,6 +44,33 @@
         </li>
 
     }
+        <li class="prodListItem" onclick="addNewProduct">
+            <div>
+                <strong class="productItemName" >Добавить</strong>
+@*                <div class="prodEditActions">
+                    <span class="editButton"   href="#" onclick="editProduct(@product.Id)"></span>
+                    <span class="removeButton" href="#" onclick="removeProduct(@product.Id)"></span>
+                </div>    *@                            
+            </div>
+
+            <div class="productImageBlock"> 
+               <img class="ProductImage" src= "@Url.Content("~/Img/add.png")" alt="Иконка добавления">
+            </div>
+            <p class="productItemDescr" >Нажмите для перехода на форму добавления продукта</p>
+
+            <div class="productItemActions">
+@*                <button class="productButton" href="#" onclick="addProductToCart(@product.Id, 1)">+</button>
+                <span id="itemCartSpan_@product.Id" class="itemCartSpan">
+                            @Model.Cart.CartOrderItems.Where(x => x.ProductId == product.Id).FirstOrDefault()?.Quantity
+                </span>
+                <button class="productButton" href="#" onclick="addProductToCart(@product.Id, -1)">-</button>*@
+                @*<input type="button" value="Add to Cart" href="#" onclick="addProductToCart(@product.ProductId, 1)" />*@
+                @*<button class="itemCartBtn"></button>*@
+                
+                @*<label class="ProductInCartCount"></label>*@
+
+            </div>
+        </li>
     </ul>
 
     </div>

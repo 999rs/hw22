@@ -51,3 +51,29 @@ function updateCartTileInfo(id, data) {
     else { alert("Контроллер не вернул ОК") }
 
 }
+
+
+function removeProduct(Id) {
+
+    $.ajax({
+        contentType: 'application/json',
+        url: '/Product/Delete/' + Id ,
+        type: 'DELETE',
+        /*   success: updateCartInfo(Id),*/
+        success: function (data) {
+            JSON.stringify(data);
+            if (data.result == "ok") {
+                removeProdTile(Id);
+                
+            }
+        },
+        error: function () { alert("Ошибка при обращении к серверу") }
+
+    })
+}
+
+function removeProdTile(Id) {
+    $("#ProdCardId_" + Id).remove();
+
+}
+    

@@ -35,7 +35,7 @@ namespace hw20.Controllers
             Product product = _context.Products.Where(p => p.Id == ProductId).FirstOrDefault();
             ProductViewModel model = new ProductViewModel(product);
             return View(model);
-            
+
 
         }
 
@@ -57,7 +57,7 @@ namespace hw20.Controllers
             {
                 cart.CartOrderItems.Where(x => x.ProductId == ProductId).FirstOrDefault().Quantity += Quantity;
             }
-            else 
+            else
                 cart.CartOrderItems.Add(new OrderItem() { ProductId = ProductId, Quantity = Quantity });
 
             // уберем позиции с нулевым значением количества
@@ -72,9 +72,45 @@ namespace hw20.Controllers
                 posCount = cart.CartOrderItems.Count,
                 itemCount = cart.CartOrderItems.Sum(x => x.Quantity),
                 thisItemNewCount = cart.CartOrderItems.Where(x => x.ProductId == ProductId).FirstOrDefault()?.Quantity
-            }) ;
+            });
         }
 
+        [Route("Delete/{ProductId:int}")]
+        [HttpDelete]
+        public IActionResult Delete(int ProductId)
+        {
+            try
+            {
+                var prod = _context.Products.Find(ProductId);
+                if (prod != null)
+                {
+                    _context.Products.Remove(prod);
+                    _context.SaveChanges();
+
+                    return new JsonResult(new
+                    {
+                        result = "ok",
+                        message = "ok"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                return new JsonResult(new
+                {
+                    result = "error",
+                    message = e.Message
+                }) ;
+
+
+            }
+
+            return new JsonResult(new
+            {
+                result = "notOk"
+            });
+
+        }
 
     }
 }
