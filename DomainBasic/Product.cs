@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.SqlTypes;
 
@@ -9,7 +10,10 @@ namespace DomainBasic
     /// </summary>
     public class Product
     {
-
+        ///// <summary>
+        ///// приватное поле с именем файла
+        ///// </summary>        
+        //private Guid _FileNameGuid = Guid.NewGuid();
 
 
         /// <summary>

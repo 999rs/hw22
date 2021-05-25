@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
+using System.Threading;
 
 namespace hw20.Models
 {
@@ -21,9 +23,15 @@ namespace hw20.Models
         /// </summary>
         public Cart Cart = new Cart();
 
-        public ProdCatalogViewModel()
+        public ProdCatalogViewModel(IEnumerable<Product> productList)
         {
-            Products = InMemRepo.ProductsRepo;
+            Products = productList.ToList();
+            foreach (var p in Products)
+            {
+                p.ImagePath = $"~/Img/Products/{p.Id}.jpeg";
+              
+            }
+
         }
     }
 }

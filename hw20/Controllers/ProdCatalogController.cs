@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EFRepository;
 
 namespace hw20.Controllers
 {
@@ -14,7 +15,13 @@ namespace hw20.Controllers
     /// </summary>
     public class ProdCatalogController : Controller
     {
-        
+        IRepository db;
+
+        public ProdCatalogController()
+        {
+            db = new SQLRepository();
+        }
+
         /// <summary>
         /// просмотр каталога
         /// </summary>
@@ -24,7 +31,7 @@ namespace hw20.Controllers
             //ViewBag.Cart = HttpContext.Session.Get<Cart>("Cart");
 
 
-            ProdCatalogViewModel model = new ProdCatalogViewModel();
+            ProdCatalogViewModel model = new ProdCatalogViewModel(db.GetAllProductList());
 
             // передадим корзину из сессии в модель для отображения количества (в каталоге)
             model.Cart = HttpContext.Session.Get<Cart>("Cart");

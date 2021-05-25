@@ -15,6 +15,9 @@ namespace EFRepository
             var optValues = options;
         }
 
+        public DataContext() : base()
+        { }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<testClass> testClasses { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

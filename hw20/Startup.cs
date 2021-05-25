@@ -10,7 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using EFRepository;
+using System.IO;
 
 namespace hw20
 {
@@ -68,6 +69,12 @@ namespace hw20
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            using (var db = new SQLRepository())
+            {
+                var folderPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products");
+                db.DownloadProdImages(folderPath);
+            }
 
 
 

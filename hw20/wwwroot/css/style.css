@@ -76,6 +76,38 @@ ul {
     align-self: center;
 }
 
+.editButton {
+    width: 15px;
+    height: 15px;
+    background-image: url(../img/edit.png);
+    background-size: cover;
+    display: inline-block;
+}
+
+.removeButton {
+    width: 15px;
+    height: 15px;
+    background-image: url(../img/remove.png);
+    background-size: cover;
+    display: inline-block;
+}
+.prodEditActions {
+    min-width: fit-content;
+}
+
+.productNameBlock {
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.productItemName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
 .itemCartBtn {
     width: 40px;
     height: 40px;
