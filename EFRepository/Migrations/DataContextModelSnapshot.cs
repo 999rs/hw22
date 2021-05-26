@@ -30,10 +30,6 @@ namespace EFRepository.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("ImagePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("ProductBasicPrice")
                         .HasColumnType("float");
 

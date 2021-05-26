@@ -18,6 +18,8 @@ namespace hw20.Models
         /// </summary>
         public List<Product> Products = new List<Product>();
 
+        public Dictionary<int, string> ProductImages = new Dictionary<int, string>();
+
         /// <summary>
         /// Корзина
         /// </summary>
@@ -28,8 +30,9 @@ namespace hw20.Models
             Products = productList.ToList();
             foreach (var p in Products)
             {
-                p.ImagePath = $"~/Img/Products/{p.Id}.jpeg";
-              
+               // p.ImagePath = $"~/Img/Products/{p.Id}.jpeg";
+
+                ProductImages.Add(p.Id, $"~/Img/Products/{p.Id}.jpeg");
             }
 
         }

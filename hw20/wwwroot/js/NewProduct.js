@@ -24,7 +24,10 @@
         error: function (xhr, error, status) {
             blockFormSend();
             console.log(error, status);
-            showMessage("Ошибка на сервере! " + xhr.error + " *** " + xhr.message, 1) 
+            showMessage("Ошибка на сервере! " + xhr.error + " *** " + xhr.message, 1);
+            setTimeout(function () {
+                unblockFormSend();
+            }, 3000);
         }
     });
 });

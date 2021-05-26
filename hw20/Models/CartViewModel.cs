@@ -17,9 +17,19 @@ namespace hw20.Models
         /// </summary>
         public Cart Cart;
 
+        public Dictionary<int, string> ProductImages = new Dictionary<int, string>();
+
         public CartViewModel()
         {
+            var ProdIds = Cart.CartOrderItems.Select(x => x.ProductId);
 
+            foreach (var p in ProdIds)
+            {
+                // p.ImagePath = $"~/Img/Products/{p.Id}.jpeg";
+
+                ProductImages.Add(p, $"~/Img/Products/{p}.jpeg");
+                
+            }
 
         }
 

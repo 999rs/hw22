@@ -64,7 +64,7 @@ function removeProduct(Id) {
             JSON.stringify(data);
             if (data.result == "ok") {
                 removeProdTile(Id);
-                
+                showMessage("Продукт удален!", 0)
             }
         },
         error: function () { alert("Ошибка при обращении к серверу") }

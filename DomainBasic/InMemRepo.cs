@@ -25,7 +25,7 @@ namespace DomainBasic
                 Id = 1,
                 ProductBasicPrice = 100,
                 ProductName = "Хлеб",
-                ImagePath = "~/Img/Products/Bread.jpg",
+
                 ProductDescription = "Белый хлеб собственной выпечки. Изготовлен из лучших продуктов в лучших традициях пекарного дела."
             });
 
@@ -35,7 +35,7 @@ namespace DomainBasic
                 Id = 2,
                 ProductBasicPrice = 20,
                 ProductName = "Соль",
-                ImagePath = "~/Img/Products/Salt.jpg",
+
                 ProductDescription = "Природная соль без искуственных добавок."
             });
 
@@ -44,7 +44,7 @@ namespace DomainBasic
                 Id = 3,
                 ProductBasicPrice = 100,
                 ProductName = "Юникорн Спешиал",
-                ImagePath = "~/Img/Products/virezkaFront.jpg",
+
                 ProductDescription = "Фирменная вырезка Юникорн Спешиал. Ароматное мясо к вашему столу!"
             });
 
@@ -53,7 +53,7 @@ namespace DomainBasic
                 Id = 4,
                 ProductBasicPrice = 100,
                 ProductName = "Левая голень",
-                ImagePath = "~/Img/Products/virezkaLeft.jpg",
+                
                 ProductDescription = "Вырезка левой голени. Превосходный вкус! Ноль калорий!"
             });
             ProductsRepo.Add(new Product()
@@ -61,7 +61,7 @@ namespace DomainBasic
                 Id = 5,
                 ProductBasicPrice = 100,
                 ProductName = "Правая голень",
-                ImagePath = "~/Img/Products/virezkaMiddle.jpg",
+                
                 ProductDescription = "Вырезка правой голени. Богата клетчаткой!"
             });
 

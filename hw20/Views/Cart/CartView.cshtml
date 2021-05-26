@@ -27,7 +27,7 @@
                     if (product != null)
                     {
                         <li class="CartListItem">
-                            <img class="CartProductImage" src= "@Url.Content(product.ImagePath)" alt="@product.ProductName">
+                            <img class="CartProductImage" src= "@Url.Content($"~/Img/Products/{product.Id}.jpeg")" alt="@product.ProductName">
                             <p class="CartProductName">@InMemRepo.ProductsRepo.Where(x=> x.Id == prod.ProductId).FirstOrDefault().ProductName</p>
                             @*<p>Quantity: @prod.Quantity</p>*@
                             <div class="CartItemsActions">

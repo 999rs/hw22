@@ -41,11 +41,6 @@ namespace DomainBasic
         public double ProductBasicPrice { get; set; }
 
 
-        /// <summary>
-        /// путь к картинке продукта
-        /// </summary>
-        [Required]
-        public string ImagePath { get; set; }
 
         /// <summary>
         /// храним картинку в бд

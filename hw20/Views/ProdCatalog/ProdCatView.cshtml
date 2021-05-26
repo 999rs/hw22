@@ -15,6 +15,9 @@
     <ul id="productList" class="productList">
     @foreach(var product in Model.Products)
     {
+        string ProdImgPath = Model.ProductImages[product.Id];
+    
+         
         <li class="prodListItem" id="ProdCardId_@product.Id">
             <div class="productNameBlock">
                 <strong class="productItemName" title="@product.ProductName">@product.ProductName</strong>
@@ -25,7 +28,7 @@
             </div>
 
             <div class="productImageBlock"> 
-               <img class="ProductImage" src= "@Url.Content(product.ImagePath)" alt="@product.ProductName">
+               <img class="ProductImage" src= "@Url.Content(ProdImgPath)" alt="@product.ProductName">
             </div>
             <p class="productItemDescr" title="@product.ProductDescription">@product.ProductDescription</p>
 

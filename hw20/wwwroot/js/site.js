@@ -27,9 +27,7 @@ function showMessage(message, isError) {
         $("#pinId").addClass("hidden");
     }, 3000);
 
-    setTimeout(function () {       
-        unblockFormSend();
-    }, 3000);
+
 
 }
 

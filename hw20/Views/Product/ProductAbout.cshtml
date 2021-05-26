@@ -16,7 +16,7 @@
 
 <div>
 
-    <img class="ProductImage" src= "@Url.Content(Model.Product.ImagePath)" alt="Image" />
+    <img class="ProductImage" src= "@Url.Content($"~/Img/Products/{Model.Product.Id}.jpeg")" alt="Image" />
    
     <p>Name: @Model.Product.ProductName</p>    
     <p>Description: @Model.Product.ProductDescription</p>    

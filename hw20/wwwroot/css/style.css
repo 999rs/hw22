@@ -254,3 +254,12 @@ ul {
 
 
 }
+
+.newProdOutContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.newProdInnerContainer {
+
+}
