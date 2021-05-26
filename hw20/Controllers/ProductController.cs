@@ -65,6 +65,7 @@ namespace hw20.Controllers
                     formModel.Upload.CopyTo(ms);
                     formModel.Product.ImageData = ms.ToArray();
                     ModelState.Remove("Product.ImageData");
+                    ModelState.Remove("Product.ImagePath");
                     ModelState.Remove("PageContext.HttpContext");
                     ModelState.Remove("PageContext.RouteData");
 
