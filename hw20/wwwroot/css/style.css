@@ -195,11 +195,13 @@ ul {
 }
 
 .messageInfo {
-    display:block;
+    display: block;
     background: lightyellow;
     min-width: 300px;
     border-radius: 5px;
     padding: 20px;
+    z-index: 2;
+    white-space: pre;
 }
 
 .messageError {
@@ -208,6 +210,8 @@ ul {
     min-width: 300px;
     border-radius: 5px;
     padding: 20px;
+    z-index: 2;
+    white-space: pre;
 }
 
 .showBlock {
@@ -220,4 +224,28 @@ ul {
     transition: visibility 1s, opacity 1s;
     visibility: hidden;
     opacity: 0;
+}
+
+.pinIcon {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-image: url(../img/pin.png);
+    background-size: cover;
+    display: inline-block;
+    left: 45%;
+    top: 5px;
+    z-index: 3;
+}
+
+.UnPinIcon {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-image: url(../img/unpin.png);
+    background-size: cover;
+    display: inline-block;
+    left: 45%;
+    top: 5px;
+    z-index: 3;
 }

@@ -58,33 +58,87 @@ namespace hw20.Controllers
         [HttpPost]
         public IActionResult NewProduct( [Bind("Product,Upload")] ProductViewModel formModel)
         {
-            
-            using (MemoryStream ms = new MemoryStream())
+            if (formModel.Upload != null)
             {
-                formModel.Upload.CopyTo(ms);
-                formModel.Product.ImageData = ms.ToArray();
-            }
-
-            ModelState.Clear();
-            if (ModelState.IsValid)
-            {
-                try
+                using (MemoryStream ms = new MemoryStream())
                 {
-                    db.Create(formModel.Product);
-                    db.Save();
-                    //_context.Add(formModel.Product);
-                    //_context.SaveChanges();
+                    formModel.Upload.CopyTo(ms);
+                    formModel.Product.ImageData = ms.ToArray();
+                    ModelState.Remove("Product.ImageData");
+                    ModelState.Remove("PageContext.HttpContext");
+                    ModelState.Remove("PageContext.RouteData");
 
-                    var folderPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products");
-                    db.DownloadProdImages(folderPath);
+
                 }
-                catch (Exception e)
-                { 
+
+
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        db.Create(formModel.Product);
+                        db.Save();
+                        //_context.Add(formModel.Product);
+                        //_context.SaveChanges();
+
+                        var folderPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products");
+                        db.DownloadProdImages(folderPath);
+                    }
+                    catch (Exception e)
+                    {
+                        return new JsonResult(new
+                        {
+                            result = "notOk",
+                            message = e.Message,
+                            
+                        });
+
+                    }
+                }
+                else 
+                {
+                    string AllErrorMessages = "";
+
+                    var errors =
+                        from item in ModelState
+                        where item.Value.Errors.Count > 0
+                        select item.Key;
+                    var keys = errors.ToArray();
+
+
+                    foreach (var k in keys)
+                    {
+                        AllErrorMessages += $"{Environment.NewLine}**{k}**:";
+                        foreach (var e in ModelState[k].Errors)
+                        {
+                            AllErrorMessages += $"    {Environment.NewLine}{e.ErrorMessage}";                           
+                        }
+                    }
+
                     
+                    return new JsonResult(new
+                    {
+                        result = "notOk",
+                        message = $"Модель невалидна: {AllErrorMessages}",
+                        
+                    });
                 }
 
             }
-            return RedirectToAction("ProdCatView", "ProdCatalog");
+            else {
+                return new JsonResult(new
+                {
+                    result = "notOk",
+                    message = "Нельзя добавить продукт без файла картинки",
+                });
+            }
+
+
+            return new JsonResult(new
+            {
+                result = "ok",     
+                message = "Продукт добавлен",
+            });
 
         }
 

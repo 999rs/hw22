@@ -9,35 +9,32 @@
         contentType: false,
         processData: false,
         success: function (data) {
-            console.log(data.UploadedFileCount + ' file(s) uploaded successfully');
+            blockFormSend();
+            //console.log(data.UploadedFileCount + ' file(s) uploaded successfully');
+
+            if (data.result == "ok")
+                showMessage(data.message, 0)
+            else {
+                console.log(data.message);
+                showMessage("Ошибка! " + data.message, 1)
+
+
+            }
         },
         error: function (xhr, error, status) {
+            blockFormSend();
             console.log(error, status);
+            showMessage("Ошибка на сервере! " + xhr.error + " *** " + xhr.message, 1) 
         }
     });
 });
 
 
 
-function showMessage(message, isError) {
-    if (isError == 1) {
-        $("#infoMessage").removeClass("messageInfo hidden");
-        $("#infoMessage").addClass("messageError showBlock");
-    } else {
-        $("#infoMessage").removeClass("messageError hidden");
-        $("#infoMessage").addClass("messageInfo showBlock");
-    }
-
-    setTimeout(function () {
-        $("#infoMessage").addClass("hidden");
-    }, 3000);
-
-}
-
 function blockFormSend() {
-
+    $("#submitBtn").hide();
 }
 
 function unblockFormSend() {
-
+    $("#submitBtn").show();
 }
