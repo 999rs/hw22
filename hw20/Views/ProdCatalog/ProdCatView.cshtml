@@ -22,8 +22,12 @@
             <div class="productNameBlock">
                 <strong class="productItemName" title="@product.ProductName">@product.ProductName</strong>
                 <div class="prodEditActions">
-                    <span class="editButton"   href="#" onclick="editProduct(@product.Id)"></span>
-                    <span class="removeButton" href="#" onclick="removeProduct(@product.Id)"></span>
+                    <a class="editButton" asp-area="" asp-controller="Product" asp-action="Edit" asp-route-id=@product.Id title="edit" >
+                       @* <span class="editButton"   href="#"></span>     *@               
+                    </a>
+
+                   @* <span class="editButton"   href="#" onclick="editProduct(@product.Id)"></span>*@
+                    <span class="removeButton" href="#" onclick="removeProduct(@product.Id)" title="Удалить продукт"></span>
                 </div>                                
             </div>
 

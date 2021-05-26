@@ -1,6 +1,7 @@
 ﻿using DomainBasic;
 using EFRepository;
 using hw20.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -143,6 +144,34 @@ namespace hw20.Controllers
 
         }
 
+
+        [Route("Edit/{ProductId:int}")]
+        [HttpGet]
+        public IActionResult Edit(int ProductId)
+        {
+            //var model = new ProductViewModel();
+            //var model = new ProductViewModel();
+
+            var model = db.GetProduct(ProductId);
+            return View(model);
+
+        }
+
+        [Route("Edit/{ProductId:int}")]
+        [HttpPost]
+        //[Bind("Id,ProductName,ProductDescription,ProductBasicPrice,ImagePath,ImageData")] Product product
+        public IActionResult Edit([Bind("Id,ProductName,ProductDescription,ProductBasicPrice,ImageData")] Product formModel,
+                    [Bind("ImageData")] IFormFile Upload)
+        {
+            var x = ModelState;
+
+            return new JsonResult(new
+            {
+                result = "notOk",
+                message = $"Модель невалидна: ",
+
+            });
+        }
 
 
 

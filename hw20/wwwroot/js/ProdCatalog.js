@@ -67,7 +67,10 @@ function removeProduct(Id) {
                 showMessage("Продукт удален!", 0)
             }
         },
-        error: function () { alert("Ошибка при обращении к серверу") }
+        error: function () {
+            showMessage("Ошибка при обращении к серверу", 1);
+            //alert("Ошибка при обращении к серверу")
+        }
 
     })
 }
@@ -75,5 +78,10 @@ function removeProduct(Id) {
 function removeProdTile(Id) {
     $("#ProdCardId_" + Id).remove();
 
+}
+
+function editProduct(id) {
+    var url = '/Product/edit/' + id;
+    window.open(url);
 }
     

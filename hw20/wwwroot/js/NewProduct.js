@@ -19,7 +19,10 @@
                 showMessage("Ошибка! " + data.message, 1)
 
 
-            }
+            };
+            setTimeout(function () {
+                unblockFormSend();
+            }, 3000);
         },
         error: function (xhr, error, status) {
             blockFormSend();

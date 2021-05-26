@@ -23,7 +23,7 @@ namespace hw20.Models
 
         public ProductViewModel()
         { 
-        Product= new Product();
+            Product= new Product();
         }
 
         /// <summary>

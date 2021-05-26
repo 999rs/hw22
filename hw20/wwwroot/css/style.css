@@ -263,3 +263,12 @@ ul {
 .newProdInnerContainer {
 
 }
+
+.editProdOutContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.editProdInnerContainer {
+
+}
