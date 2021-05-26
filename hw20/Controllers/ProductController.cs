@@ -58,6 +58,7 @@ namespace hw20.Controllers
         [HttpPost]
         public IActionResult NewProduct( [Bind("Product,Upload")] ProductViewModel formModel)
         {
+            
             using (MemoryStream ms = new MemoryStream())
             {
                 formModel.Upload.CopyTo(ms);

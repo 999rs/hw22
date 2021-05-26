@@ -1,0 +1,53 @@
+﻿@using hw20.Models
+@model ProductViewModel
+<div class="posAbsCentrOut">
+        <div id=infoMessage class="posAbsCentrInner messageInfo">
+            This is default message for message template. Be nice to it.
+        </div>
+</div>
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        <form id="newProdForm" asp-action="NewProduct" method="POST" enctype="multipart/form-data">
+           <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Product.Id" />
+            <div class="form-group">
+                <label asp-for="Product.ProductName" class="control-label"></label>
+                <input asp-for="Product.ProductName" class="form-control" />
+                <span asp-validation-for="Product.ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.ProductDescription" class="control-label"></label>
+                <input asp-for="Product.ProductDescription" class="form-control" />
+                <span asp-validation-for="Product.ProductDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.ProductBasicPrice" class="control-label"></label>
+                <input asp-for="Product.ProductBasicPrice" class="form-control" />
+                <span asp-validation-for="Product.ProductBasicPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.ImagePath" class="control-label"></label>
+                <input asp-for="Product.ImagePath" class="form-control" />
+                <span asp-validation-for="Product.ImagePath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Upload" class="control-label"></label>
+                <input type="file" asp-for="Upload" class="form-control" />
+                <span asp-validation-for="Upload" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input id="submitBtn" type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script src="~/js/NewProduct.js"  ></script>
+

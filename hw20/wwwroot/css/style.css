@@ -182,3 +182,42 @@ ul {
     color: royalblue;
 }
 
+
+.posAbsCentrOut {
+    position: absolute;
+    left: 50%;
+}
+
+.posAbsCentrInner {
+    position: relative;
+    left: -50%;
+    border: solid black 1px;
+}
+
+.messageInfo {
+    display:block;
+    background: lightyellow;
+    min-width: 300px;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.messageError {
+    display: block;
+    background: darksalmon;
+    min-width: 300px;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.showBlock {
+    transition: visibility 1s, opacity 1s;
+    visibility: visible;
+    opacity: 1
+}
+
+.hidden {
+    transition: visibility 1s, opacity 1s;
+    visibility: hidden;
+    opacity: 0;
+}
