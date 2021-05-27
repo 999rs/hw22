@@ -33,8 +33,12 @@ namespace EFRepository
 
         public void Update(Product item)
         {
-            db.Entry(item).State = EntityState.Modified;
+            //db.Entry(item).State = EntityState.Modified;
+            db.Update(item);
+            db.SaveChanges();
         }
+
+
 
         public void Delete(int id)
         {

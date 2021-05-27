@@ -32,7 +32,7 @@
             </div>
 
             <div class="productImageBlock"> 
-               <img class="ProductImage" src= "@Url.Content(ProdImgPath)" alt="@product.ProductName">
+               <img class="ProductImage" src= "@Url.Content(ProdImgPath)" alt="@product.ProductName" onerror="replaceBrokenPic(this)">
             </div>
             <p class="productItemDescr" title="@product.ProductDescription">@product.ProductDescription</p>
 
@@ -52,32 +52,34 @@
 
     }
         <li class="prodListItem"  asp-controller="ProdCatalog" asp-action="ProdCatView">
-            <div>
-                <strong class="productItemName" >Добавить</strong>
-@*                <div class="prodEditActions">
-                    <span class="editButton"   href="#" onclick="editProduct(@product.Id)"></span>
-                    <span class="removeButton" href="#" onclick="removeProduct(@product.Id)"></span>
-                </div>    *@                            
-            </div>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="NewProduct" title="NewProduct" >
+                <div>
+                    <strong class="productItemName" >Добавить</strong>
+@*                    <div class="prodEditActions">
+                        <span class="editButton"   href="#" onclick="editProduct(@product.Id)"></span>
+                        <span class="removeButton" href="#" onclick="removeProduct(@product.Id)"></span>
+                    </div>    *@                            
+                </div>
 
-            <div class="productImageBlock"  onclick="addNewProduct"> 
-               <img class="ProductImage" src= "@Url.Content("~/Img/add.png")" alt="Иконка добавления">
-            </div>
-            <p class="productItemDescr" >Нажмите для перехода на форму добавления продукта</p>
+                <div class="productImageBlock" > 
+                   <img class="ProductImage" src= "@Url.Content("~/Img/add.png")" alt="Иконка добавления">
+                </div>
+                <p class="productItemDescr" >Нажмите для перехода на форму добавления продукта</p>
 
-            <div class="productItemActions">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="NewProduct" title="NewProduct" >NewProduct</a>
-@*                <button class="productButton" href="#" onclick="addProductToCart(@product.Id, 1)">+</button>
-                <span id="itemCartSpan_@product.Id" class="itemCartSpan">
-                            @Model.Cart.CartOrderItems.Where(x => x.ProductId == product.Id).FirstOrDefault()?.Quantity
-                </span>
-                <button class="productButton" href="#" onclick="addProductToCart(@product.Id, -1)">-</button>*@
-                @*<input type="button" value="Add to Cart" href="#" onclick="addProductToCart(@product.ProductId, 1)" />*@
-                @*<button class="itemCartBtn"></button>*@
-                
-                @*<label class="ProductInCartCount"></label>*@
+                <div class="productItemActions">
+                    @*<a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="NewProduct" title="NewProduct" >NewProduct</a>*@
+@*                    <button class="productButton" href="#" onclick="addProductToCart(@product.Id, 1)">+</button>
+                    <span id="itemCartSpan_@product.Id" class="itemCartSpan">
+                                @Model.Cart.CartOrderItems.Where(x => x.ProductId == product.Id).FirstOrDefault()?.Quantity
+                    </span>
+                    <button class="productButton" href="#" onclick="addProductToCart(@product.Id, -1)">-</button>*@
+                    @*<input type="button" value="Add to Cart" href="#" onclick="addProductToCart(@product.ProductId, 1)" />*@
+                    @*<button class="itemCartBtn"></button>*@
+                    
+                    @*<label class="ProductInCartCount"></label>*@
 
-            </div>
+                </div>
+            </a>
         </li>
     </ul>
 

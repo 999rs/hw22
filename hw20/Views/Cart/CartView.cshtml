@@ -23,12 +23,13 @@
             <ul class="CartList">
                 @foreach (var prod in Model.Cart.CartOrderItems)
                 {
-                    var product = @InMemRepo.ProductsRepo.Where(x => x.Id == prod.ProductId).FirstOrDefault();
+                    //var product = @InMemRepo.ProductsRepo.Where(x => x.Id == prod.ProductId).FirstOrDefault();
+                    var product = Model.Products.Where(x => x.Id == prod.ProductId).FirstOrDefault();
                     if (product != null)
                     {
                         <li class="CartListItem">
                             <img class="CartProductImage" src= "@Url.Content($"~/Img/Products/{product.Id}.jpeg")" alt="@product.ProductName">
-                            <p class="CartProductName">@InMemRepo.ProductsRepo.Where(x=> x.Id == prod.ProductId).FirstOrDefault().ProductName</p>
+                            <p class="CartProductName">@product.ProductName</p>
                             @*<p>Quantity: @prod.Quantity</p>*@
                             <div class="CartItemsActions">
                                 <button class="productButton" href="#" onclick="addProductToCart(@product.Id, 1)">+</button>

@@ -12,8 +12,10 @@
             blockFormSend();
             //console.log(data.UploadedFileCount + ' file(s) uploaded successfully');
 
-            if (data.result == "ok")
-                showMessage(data.message, 0)
+            if (data.result == "ok") {
+                showMessage(data.message, 0);
+                clearForm();
+            }
             else {
                 console.log(data.message);
                 showMessage("Ошибка! " + data.message, 1)
@@ -43,4 +45,11 @@ function blockFormSend() {
 
 function unblockFormSend() {
     $("#submitBtn").show();
+}
+
+
+function clearForm() {
+
+    $(".form-control").each(function (index) { $(this).val('') });
+
 }

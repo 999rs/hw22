@@ -17,10 +17,14 @@ namespace hw20.Models
         /// </summary>
         public Cart Cart;
 
+        public List<Product> Products;
+
         public Dictionary<int, string> ProductImages = new Dictionary<int, string>();
 
-        public CartViewModel()
+        public CartViewModel(Cart cart, List<Product> products)
         {
+            this.Cart = cart;
+            this.Products = products;
             var ProdIds = Cart.CartOrderItems.Select(x => x.ProductId);
 
             foreach (var p in ProdIds)

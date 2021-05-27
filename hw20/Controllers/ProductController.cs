@@ -165,95 +165,89 @@ namespace hw20.Controllers
         //[Bind("Id,ProductName,ProductDescription,ProductBasicPrice,ImagePath,ImageData")] Product product
         public IActionResult Edit([Bind("Product,Upload")] ProductViewModel formModel)
         {
+            ModelState.Remove("PageContext.HttpContext");
+            ModelState.Remove("PageContext.RouteData");
+            ModelState.Remove("Product.ImageData");
+
             if (formModel.Upload != null)
             {
+
                 using (MemoryStream ms = new MemoryStream())
                 {
                     formModel.Upload.CopyTo(ms);
                     formModel.Product.ImageData = ms.ToArray();
-                    ModelState.Remove("Product.ImageData");
-                    ModelState.Remove("Product.ImagePath");
-                    ModelState.Remove("PageContext.HttpContext");
-                    ModelState.Remove("PageContext.RouteData");
-
-
                 }
-
-
-                if (ModelState.IsValid)
-                {
-                    try
-                    {
-                        db.Update(formModel.Product);
-                        db.Save();
-                        //_context.Add(formModel.Product);
-                        //_context.SaveChanges();
-
-                        var folderPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products");
-                        db.DownloadProdImages(folderPath);
-                    }
-                    catch (Exception e)
-                    {
-                        return new JsonResult(new
-                        {
-                            result = "notOk",
-                            message = e.Message,
-
-                        });
-
-                    }
-                }
-                else
-                {
-                    string AllErrorMessages = "";
-
-                    var errors =
-                        from item in ModelState
-                        where item.Value.Errors.Count > 0
-                        select item.Key;
-                    var keys = errors.ToArray();
-
-
-                    foreach (var k in keys)
-                    {
-                        AllErrorMessages += $"{Environment.NewLine}**{k}**:";
-                        foreach (var e in ModelState[k].Errors)
-                        {
-                            AllErrorMessages += $"    {Environment.NewLine}{e.ErrorMessage}";
-                        }
-                    }
-
-
-                    return new JsonResult(new
-                    {
-                        result = "notOk",
-                        message = $"Модель невалидна: {AllErrorMessages}",
-
-                    });
-                }
-
             }
             else
             {
+                byte[] testBytes = new byte[1];
+                //formModel.Product.ImageData = db.GetProduct(formModel.Product.Id).ImageData;
+                formModel.Product.ImageData = testBytes;
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    db.Update(formModel.Product);
+
+                    var folderPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products");
+                    db.DownloadImageById(formModel.Product.Id, folderPath);
+                }
+                catch (Exception e)
+                {
+                    return new JsonResult(new
+                    {
+                        result = "notOk",
+                        message = e.Message,
+
+                    });
+
+                }
+            }
+
+            else // если не валидна модель
+            {
+                string AllErrorMessages = "";
+
+                var errors =
+                    from item in ModelState
+                    where item.Value.Errors.Count > 0
+                    select item.Key;
+                var keys = errors.ToArray();
+
+
+                foreach (var k in keys)
+                {
+                    AllErrorMessages += $"{Environment.NewLine}**{k}**:";
+                    foreach (var e in ModelState[k].Errors)
+                    {
+                        AllErrorMessages += $"    {Environment.NewLine}{e.ErrorMessage}";
+                    }
+                }
+
+
                 return new JsonResult(new
                 {
                     result = "notOk",
-                    message = "Нельзя добавить продукт без файла картинки",
+                    message = $"Модель невалидна: {AllErrorMessages}",
+
                 });
             }
 
 
+            string msgText = "Продукт обновлен.";
+            if (formModel.Upload == null)
+                msgText += Environment.NewLine + "Картинка не была выбрана и оставлена без изменений";
+
             return new JsonResult(new
             {
                 result = "ok",
-                message = "Продукт добавлен",
+                message = msgText,
             });
 
+            
         }
-
-
-
-
         /// <summary>
         /// добавление продукта в карзину
         /// </summary>

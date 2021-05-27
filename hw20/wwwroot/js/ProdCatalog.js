@@ -84,4 +84,8 @@ function editProduct(id) {
     var url = '/Product/edit/' + id;
     window.open(url);
 }
-    
+
+function replaceBrokenPic(img) {
+    img.onerror = '';
+    img.src = '../img/products/ProdNotFound.jpg';
+}

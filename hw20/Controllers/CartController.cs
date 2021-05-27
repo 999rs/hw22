@@ -8,6 +8,7 @@ using DomainBasic;
 using System.Security.Policy;
 using hw20.Models;
 using System.Text.Json;
+using EFRepository;
 
 namespace hw20.Controllers
 {
@@ -16,7 +17,14 @@ namespace hw20.Controllers
     /// </summary>
     public class CartController : Controller
     {
-       
+
+        IRepository db;
+
+        public CartController()
+        {
+            db = new SQLRepository();
+        }
+
         /// <summary>
         /// просмотр карзины
         /// </summary>
@@ -26,8 +34,9 @@ namespace hw20.Controllers
             EnsureSessionParams();
           
             // вью модель
-            CartViewModel model = new CartViewModel();
-            ViewBag.Cart = HttpContext.Session.Get<Cart>("Cart");
+            Cart cart = HttpContext.Session.Get<Cart>("Cart");
+            CartViewModel model = new CartViewModel(cart, db.GetAllProductList().ToList());
+            ViewBag.Cart = cart;
             PopulateCartViewModel(model);
 
             // возврат вью
