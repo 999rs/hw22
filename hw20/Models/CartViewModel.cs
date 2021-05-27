@@ -17,10 +17,21 @@ namespace hw20.Models
         /// </summary>
         public Cart Cart;
 
+        /// <summary>
+        /// продукты
+        /// </summary>
         public List<Product> Products;
 
+        /// <summary>
+        /// справоник путей к картинке
+        /// </summary>
         public Dictionary<int, string> ProductImages = new Dictionary<int, string>();
 
+        /// <summary>
+        /// конструктор
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="products"></param>
         public CartViewModel(Cart cart, List<Product> products)
         {
             this.Cart = cart;
@@ -29,10 +40,7 @@ namespace hw20.Models
 
             foreach (var p in ProdIds)
             {
-                // p.ImagePath = $"~/Img/Products/{p.Id}.jpeg";
-
-                ProductImages.Add(p, $"~/Img/Products/{p}.jpeg");
-                
+                ProductImages.Add(p, $"~/Img/Products/{p}.jpeg");                
             }
 
         }

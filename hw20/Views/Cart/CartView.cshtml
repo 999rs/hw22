@@ -23,14 +23,14 @@
             <ul class="CartList">
                 @foreach (var prod in Model.Cart.CartOrderItems)
                 {
-                    //var product = @InMemRepo.ProductsRepo.Where(x => x.Id == prod.ProductId).FirstOrDefault();
+                    
                     var product = Model.Products.Where(x => x.Id == prod.ProductId).FirstOrDefault();
                     if (product != null)
                     {
                         <li class="CartListItem">
                             <img class="CartProductImage" src= "@Url.Content($"~/Img/Products/{product.Id}.jpeg")" alt="@product.ProductName">
                             <p class="CartProductName">@product.ProductName</p>
-                            @*<p>Quantity: @prod.Quantity</p>*@
+                    
                             <div class="CartItemsActions">
                                 <button class="productButton" href="#" onclick="addProductToCart(@product.Id, 1)">+</button>
                                 <span id="itemCartSpan_@product.Id" class="itemCartSpan">
@@ -46,9 +46,7 @@
                            </li> 
                     }; 
                         
-            
-                @*<p>Quantity: @prod.Quantity</p>*@
-            
+
                  }    
                 
             </ul>
@@ -58,7 +56,3 @@
 </div>
 
 <script src="~/js/Cart.js"  ></script>
-@*<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>*@

@@ -28,8 +28,6 @@ namespace hw20.Controllers
         /// <returns></returns>
         public ActionResult ProdCatView()
         {
-            //ViewBag.Cart = HttpContext.Session.Get<Cart>("Cart");
-
 
             ProdCatalogViewModel model = new ProdCatalogViewModel(db.GetAllProductList());
 

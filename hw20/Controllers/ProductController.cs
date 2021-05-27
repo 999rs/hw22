@@ -21,10 +21,13 @@ namespace hw20.Controllers
     {
         private readonly DataContext _context;
 
+        // репозиторий
         IRepository db;
-        
 
-
+        /// <summary>
+        /// конструктор
+        /// </summary>
+        /// <param name="context">контекст</param>
         public ProductController(DataContext context)
         {
             _context = context;
@@ -46,6 +49,10 @@ namespace hw20.Controllers
 
         }
 
+        /// <summary>
+        /// добавление продукта - открытие формы
+        /// </summary>
+        /// <returns></returns>
         [Route("NewProduct")]
         [HttpGet]
         public IActionResult NewProduct()
@@ -55,12 +62,19 @@ namespace hw20.Controllers
         
         }
 
+        /// <summary>
+        /// добавление продукта - отправка данных
+        /// </summary>
+        /// <param name="formModel"></param>
+        /// <returns></returns>
         [Route("NewProduct")]
         [HttpPost]
         public IActionResult NewProduct( [Bind("Product,Upload")] ProductViewModel formModel)
         {
+            // если приложили файл
             if (formModel.Upload != null)
             {
+                // запишем файл в экземпляр
                 using (MemoryStream ms = new MemoryStream())
                 {
                     formModel.Upload.CopyTo(ms);
@@ -73,16 +87,16 @@ namespace hw20.Controllers
 
                 }
 
-
+                
                 if (ModelState.IsValid)
                 {
                     try
                     {
+                        // пробуем сохранить в базу
                         db.Create(formModel.Product);
                         db.Save();
-                        //_context.Add(formModel.Product);
-                        //_context.SaveChanges();
-
+                        
+                        // загружаем картинку на диск
                         var folderPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products");
                         db.DownloadProdImages(folderPath);
                     }
@@ -99,6 +113,7 @@ namespace hw20.Controllers
                 }
                 else 
                 {
+                    // сформируем сообщение для показа пользователю
                     string AllErrorMessages = "";
 
                     var errors =
@@ -108,6 +123,7 @@ namespace hw20.Controllers
                     var keys = errors.ToArray();
 
 
+                    // перечислим ошибки валидации
                     foreach (var k in keys)
                     {
                         AllErrorMessages += $"{Environment.NewLine}**{k}**:";
@@ -117,7 +133,7 @@ namespace hw20.Controllers
                         }
                     }
 
-                    
+                    // отправим резултьтат клиенту
                     return new JsonResult(new
                     {
                         result = "notOk",
@@ -128,6 +144,7 @@ namespace hw20.Controllers
 
             }
             else {
+                // добавление без картинки недопустимо
                 return new JsonResult(new
                 {
                     result = "notOk",
@@ -135,7 +152,7 @@ namespace hw20.Controllers
                 });
             }
 
-
+            // сообщим об успешной операции
             return new JsonResult(new
             {
                 result = "ok",     
@@ -145,30 +162,39 @@ namespace hw20.Controllers
         }
 
 
+        /// <summary>
+        /// редактирование продукта - форма
+        /// </summary>
+        /// <param name="ProductId"></param>
+        /// <returns></returns>
         [Route("Edit/{ProductId:int}")]
         [HttpGet]
         public IActionResult Edit(int ProductId)
         {
-            //var model = new ProductViewModel();
-            //var model = new ProductViewModel();
 
+            // сформируем вьюмодель
             var model = db.GetProduct(ProductId);
-
             var viewmodel = new ProductViewModel(model);
 
             return View(viewmodel);
 
         }
 
+        /// <summary>
+        /// редактирование продукта - отправка
+        /// </summary>
+        /// <param name="formModel"></param>
+        /// <returns></returns>
         [Route("Edit/{ProductId:int}")]
         [HttpPost]
-        //[Bind("Id,ProductName,ProductDescription,ProductBasicPrice,ImagePath,ImageData")] Product product
+        
         public IActionResult Edit([Bind("Product,Upload")] ProductViewModel formModel)
         {
             ModelState.Remove("PageContext.HttpContext");
             ModelState.Remove("PageContext.RouteData");
             ModelState.Remove("Product.ImageData");
 
+            // если картинку приложили
             if (formModel.Upload != null)
             {
 
@@ -178,19 +204,16 @@ namespace hw20.Controllers
                     formModel.Product.ImageData = ms.ToArray();
                 }
             }
-            else
-            {
-                byte[] testBytes = new byte[1];
-                //formModel.Product.ImageData = db.GetProduct(formModel.Product.Id).ImageData;
-                formModel.Product.ImageData = testBytes;
-            }
+
 
             if (ModelState.IsValid)
             {
                 try
                 {
+                    // обновим репозиторий
                     db.Update(formModel.Product);
 
+                    //скачаем каритнку
                     var folderPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products");
                     db.DownloadImageById(formModel.Product.Id, folderPath);
                 }
@@ -217,6 +240,7 @@ namespace hw20.Controllers
                 var keys = errors.ToArray();
 
 
+                // перечислим ошибки валидации
                 foreach (var k in keys)
                 {
                     AllErrorMessages += $"{Environment.NewLine}**{k}**:";
@@ -240,6 +264,7 @@ namespace hw20.Controllers
             if (formModel.Upload == null)
                 msgText += Environment.NewLine + "Картинка не была выбрана и оставлена без изменений";
 
+            // отправим результат
             return new JsonResult(new
             {
                 result = "ok",
@@ -248,6 +273,7 @@ namespace hw20.Controllers
 
             
         }
+
         /// <summary>
         /// добавление продукта в карзину
         /// </summary>
@@ -283,17 +309,23 @@ namespace hw20.Controllers
             });
         }
 
+        /// <summary>
+        /// удаление продукта из каталога
+        /// </summary>
+        /// <param name="ProductId"></param>
+        /// <returns></returns>
         [Route("Delete/{ProductId:int}")]
         [HttpDelete]
         public IActionResult Delete(int ProductId)
         {
             try
             {
-                var prod = _context.Products.Find(ProductId);
+                //var prod = _context.Products.Find(ProductId);
+                var prod = db.GetProduct(ProductId);
                 if (prod != null)
                 {
-                    _context.Products.Remove(prod);
-                    _context.SaveChanges();
+                    db.Delete(ProductId);
+                    db.Save();
 
                     return new JsonResult(new
                     {

@@ -33,8 +33,15 @@ namespace EFRepository
 
         public void Update(Product item)
         {
-            //db.Entry(item).State = EntityState.Modified;
-            db.Update(item);
+            
+
+            db.Entry(item).State = EntityState.Modified;
+            // изображение нельзя заменить на пустое знасение
+            if (item.ImageData == null)
+            {
+                db.Entry(item).Property(x => x.ImageData).IsModified = false;
+            }
+            //db.Update(item);
             db.SaveChanges();
         }
 
@@ -91,7 +98,10 @@ namespace EFRepository
         {
             var prod = db.Products.Find(id);
             var file = Path.Combine(path, prod.Id.ToString() + ".jpeg");
-            File.WriteAllBytesAsync(file, prod.ImageData);
+            if (prod.ImageData != null) { 
+                File.WriteAllBytesAsync(file, prod.ImageData);
+            };
+            
         }
     }
 }

@@ -18,19 +18,25 @@ namespace hw20.Models
         /// </summary>
         public List<Product> Products = new List<Product>();
 
+        /// <summary>
+        /// справочник путей картинок
+        /// </summary>
         public Dictionary<int, string> ProductImages = new Dictionary<int, string>();
 
         /// <summary>
         /// Корзина
         /// </summary>
         public Cart Cart = new Cart();
-
+        
+        /// <summary>
+        /// конструктор
+        /// </summary>
+        /// <param name="productList"></param>
         public ProdCatalogViewModel(IEnumerable<Product> productList)
         {
             Products = productList.ToList();
             foreach (var p in Products)
             {
-               // p.ImagePath = $"~/Img/Products/{p.Id}.jpeg";
 
                 ProductImages.Add(p.Id, $"~/Img/Products/{p.Id}.jpeg");
             }

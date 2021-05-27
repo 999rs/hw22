@@ -15,12 +15,9 @@ namespace hw20.Models
     /// </summary>
     public class ProductViewModel : PageModel
     {
-        //private IHostingEnvironment _environment;
-        //public ProductViewModel(IHostingEnvironment environment)
-        //{
-        //    _environment = environment;
-        //}
-
+        /// <summary>
+        /// конструктор
+        /// </summary>
         public ProductViewModel()
         { 
             Product= new Product();
@@ -33,9 +30,16 @@ namespace hw20.Models
         public Product Product { get; set; }
         public string modelInfo = "empty";
 
+        /// <summary>
+        /// приложенный файл
+        /// </summary>
         [BindProperty]
         public IFormFile Upload { get; set; }
 
+        /// <summary>
+        /// конструктор
+        /// </summary>
+        /// <param name="product"></param>
         public ProductViewModel(Product product)
         {
             this.Product = product;

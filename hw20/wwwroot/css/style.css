@@ -56,13 +56,14 @@ ul {
 }
 
 .productItemDescr {
-    padding: 5px; 
+    padding: 5px;
     font-size: smaller;
     overflow: hidden;
-    text-overflow: ellipsis;    
+    text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    white-space: normal;
 }
 
 .catalogListBlock {
