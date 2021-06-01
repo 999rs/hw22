@@ -31,8 +31,8 @@ namespace hw20
             string connection = Configuration.GetConnectionString("DefaultConnection");
             // добавляем контекст MobileContext в качестве сервиса в приложение
 
-            services.AddDbContext<EFRepository.DataContext>(options =>
-                options.UseSqlServer(connection));
+            //services.AddDbContext<EFRepository.DataContext>(options =>
+            //    options.UseSqlServer(connection));
             //services.AddDbContext<EFRepository.DataContext>();
 
             services.AddControllersWithViews();
@@ -70,12 +70,15 @@ namespace hw20
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            using (var db = new SQLRepository())
-            {
-                var folderPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products");
-                db.DownloadProdImages(folderPath);
-            }
+            //using (var db = new SQLRepository())
+            //{
+            //    var folderPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products");
+            //    db.DownloadProdImages(folderPath);
+            //}
 
+            // загружаем картинку на диск
+            var folderPath2 = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products");
+            DataApiCalls.Products.SaveImagesTo(folderPath2);
 
 
         }

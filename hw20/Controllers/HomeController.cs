@@ -28,8 +28,8 @@ namespace hw20.Controllers
         /// <returns></returns>
         public IActionResult Index()
         {
-            
-                return View();
+            var x = DataApiCalls.Products.GetProductById(2);
+            return View();
         }
 
         /// <summary>
