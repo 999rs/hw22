@@ -33,7 +33,11 @@ namespace hw20
 
             //services.AddDbContext<EFRepository.DataContext>(options =>
             //    options.UseSqlServer(connection));
-            //services.AddDbContext<EFRepository.DataContext>();
+            //services.AddDbContext<EFRepository.DataContext>()
+            //
+            //;
+             
+            // ident 22.4   13:18
 
             services.AddControllersWithViews();
             services.AddDistributedMemoryCache();

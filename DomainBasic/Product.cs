@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.SqlTypes;
+using System.IO;
 
 namespace DomainBasic
 {
@@ -47,5 +48,14 @@ namespace DomainBasic
         /// </summary>
         [Required]
         public byte[] ImageData { get; set; }
+
+        /// <summary>
+        /// сохраняет картинку в файл
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void DownloadImage(string fileName)
+        {
+            File.WriteAllBytesAsync(fileName, this.ImageData);
+        }
     }
 }

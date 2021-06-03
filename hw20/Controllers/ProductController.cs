@@ -93,12 +93,13 @@ namespace hw20.Controllers
                     try
                     {
                         // пробуем сохранить в базу
-                        db.Create(formModel.Product);
-                        db.Save();
+                        //db.Create(formModel.Product);
+                        //db.Save();
+                        DataApiCalls.Products.Create(formModel.Product);
                         
                         // загружаем картинку на диск
                         var folderPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products");
-                        db.DownloadProdImages(folderPath);
+                        formModel.Product.DownloadImage(folderPath);
                     }
                     catch (Exception e)
                     {

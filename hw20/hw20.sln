@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFRepository", "..\EFReposi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApp", "..\WpfApp\WpfApp.csproj", "{89D93A10-8667-4211-8855-2DACC433B22A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataApiCalls", "..\DataApiCalls\DataApiCalls.csproj", "{4D8440D5-CD12-4261-8B08-BE8A6FB8B0B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{89D93A10-8667-4211-8855-2DACC433B22A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89D93A10-8667-4211-8855-2DACC433B22A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89D93A10-8667-4211-8855-2DACC433B22A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D8440D5-CD12-4261-8B08-BE8A6FB8B0B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D8440D5-CD12-4261-8B08-BE8A6FB8B0B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D8440D5-CD12-4261-8B08-BE8A6FB8B0B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D8440D5-CD12-4261-8B08-BE8A6FB8B0B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

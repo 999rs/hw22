@@ -29,6 +29,13 @@ namespace hw20.Controllers
         public IActionResult Index()
         {
             var x = DataApiCalls.Products.GetProductById(2);
+            var z = DataApiCalls.Products.Create(new DomainBasic.Product()
+            {
+                ImageData = x.ImageData,
+                ProductBasicPrice = x.ProductBasicPrice,
+                ProductName = x.ProductName+ "_api",
+                ProductDescription = x.ProductDescription,
+            }); 
             return View();
         }
 
