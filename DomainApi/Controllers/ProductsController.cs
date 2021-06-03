@@ -45,26 +45,35 @@ namespace DomainApi.Controllers
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(int id, Product product)
+        public async Task<IActionResult> PutProduct(Product product)
         {
-            if (id != product.Id)
+            var productInContext = _context.Products.Find(product.Id);
+
+            if (productInContext == null)
             {
                 return BadRequest();
             }
 
-            _context.Entry(product).State = EntityState.Modified;
+          
+            
 
             try
             {
+                _context.Entry(productInContext).CurrentValues.SetValues(product);
+
+
+                //_context.Entry(productInContext).State = EntityState.Modified;
+
+                
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception e)
             {
-                if (!ProductExists(id))
-                {
-                    return NotFound();
-                }
-                else
+                //if (!ProductExists(product.Id))
+                //{
+                //    return NotFound();
+                //}
+                //else
                 {
                     throw;
                 }

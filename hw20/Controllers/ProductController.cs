@@ -95,10 +95,10 @@ namespace hw20.Controllers
                         // пробуем сохранить в базу
                         //db.Create(formModel.Product);
                         //db.Save();
-                        DataApiCalls.Products.Create(formModel.Product);
+                        var res = DataApiCalls.Products.Create(formModel.Product);
                         
                         // загружаем картинку на диск
-                        var folderPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products");
+                        var folderPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products", $"{formModel.Product.Id}.jpg");
                         formModel.Product.DownloadImage(folderPath);
                     }
                     catch (Exception e)
@@ -212,11 +212,18 @@ namespace hw20.Controllers
                 try
                 {
                     // обновим репозиторий
-                    db.Update(formModel.Product);
+                    //db.Update(formModel.Product);
+                    var rez = DataApiCalls.Products.Update(formModel.Product);
+                    if (rez.IsSuccessStatusCode)
+                    { 
+                        //скачаем каритнку
+                        var path = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products", $"{formModel.Product.Id}.jpg");
 
-                    //скачаем каритнку
-                    var folderPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products");
-                    db.DownloadImageById(formModel.Product.Id, folderPath);
+                        formModel.Product.DownloadImage(path);
+                        //db.DownloadImageById(formModel.Product.Id, folderPath);
+                    }
+
+
                 }
                 catch (Exception e)
                 {
@@ -322,19 +329,31 @@ namespace hw20.Controllers
             try
             {
                 //var prod = _context.Products.Find(ProductId);
-                var prod = db.GetProduct(ProductId);
-                if (prod != null)
+                //var prod = db.GetProduct(ProductId);
+                //if (prod != null)
+                //{
+                //db.Delete(ProductId);
+                //db.Save();
+                var rez = DataApiCalls.Products.Delete(ProductId);
+                if (rez.IsSuccessStatusCode)
                 {
-                    db.Delete(ProductId);
-                    db.Save();
-
                     return new JsonResult(new
                     {
                         result = "ok",
                         message = "ok"
                     });
                 }
+                else
+                {
+                    return new JsonResult(new
+                    {
+                        result = "notOk",
+                        message = $"http code {rez.StatusCode}, {rez.Content.ReadAsStringAsync()}"
+                    });
+                }
+
             }
+            //}
             catch (Exception e)
             {
                 return new JsonResult(new
@@ -346,10 +365,6 @@ namespace hw20.Controllers
 
             }
 
-            return new JsonResult(new
-            {
-                result = "notOk"
-            });
 
         }
 

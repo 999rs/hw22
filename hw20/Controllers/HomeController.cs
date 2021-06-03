@@ -29,13 +29,23 @@ namespace hw20.Controllers
         public IActionResult Index()
         {
             var x = DataApiCalls.Products.GetProductById(2);
-            var z = DataApiCalls.Products.Create(new DomainBasic.Product()
-            {
-                ImageData = x.ImageData,
-                ProductBasicPrice = x.ProductBasicPrice,
-                ProductName = x.ProductName+ "_api",
-                ProductDescription = x.ProductDescription,
-            }); 
+
+            x.ProductName = x.ProductName + "_apiUpdate";
+
+            var u = DataApiCalls.Products.Update(x);
+            
+
+            var t = "test";
+
+            //var z = DataApiCalls.Products.Create(new DomainBasic.Product()
+            //{
+            //    ImageData = x.ImageData,
+            //    ProductBasicPrice = x.ProductBasicPrice,
+            //    ProductName = x.ProductName+ "_api",
+            //    ProductDescription = x.ProductDescription,
+            //}); 
+            
+
             return View();
         }
 
