@@ -244,7 +244,8 @@ namespace hw20.Controllers
                         //скачаем каритнку
                         var path = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products", $"{formModel.Product.Id}.jpeg");
 
-                        formModel.Product.DownloadImage(path);
+                        if (!((formModel.Product.ImageData == null) ? true : formModel.Product.ImageData.Length == 0))
+                            formModel.Product.DownloadImage(path);
                         //db.DownloadImageById(formModel.Product.Id, folderPath);
                     }
 

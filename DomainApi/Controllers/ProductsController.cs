@@ -61,7 +61,8 @@ namespace DomainApi.Controllers
                       
 
                 _context.Entry(productInContext).CurrentValues.SetValues(product);
-                if (product.ImageData == null)
+                
+                if ((product.ImageData == null) ? true : product.ImageData.Length == 0)
                 {
                     _context.Entry(productInContext).Property(x => x.ImageData).IsModified = false;
                 }

@@ -37,7 +37,8 @@ namespace EFRepository
 
             db.Entry(item).State = EntityState.Modified;
             // изображение нельзя заменить на пустое знасение
-            if (item.ImageData == null)
+            
+            if ((item.ImageData == null) ? true : item.ImageData.Length == 0)
             {
                 db.Entry(item).Property(x => x.ImageData).IsModified = false;
             }
