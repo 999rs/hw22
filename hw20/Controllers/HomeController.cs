@@ -28,14 +28,14 @@ namespace hw20.Controllers
         /// <returns></returns>
         public IActionResult Index()
         {
-            var x = DataApiCalls.Products.GetProductById(2);
+            //var x = DataApiCalls.Products.GetProductById(2);
 
-            x.ProductName = x.ProductName + "_apiUpdate";
+            //x.ProductName = x.ProductName + "_apiUpdate";
 
-            var u = DataApiCalls.Products.Update(x);
+            //var u = DataApiCalls.Products.Update(x);
             
 
-            var t = "test";
+            //var t = "test";
 
             //var z = DataApiCalls.Products.Create(new DomainBasic.Product()
             //{

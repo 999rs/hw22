@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DomainBasic;
 using EFRepository;
+using Newtonsoft.Json;
 
 namespace DomainApi.Controllers
 {
@@ -42,58 +43,65 @@ namespace DomainApi.Controllers
             return product;
         }
 
-        // PUT: api/Products/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api/Products/5                      ===============================  UPDATE
+         
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(Product product)
+        public async Task<IActionResult> PutProduct([FromBody] Product product, [FromRoute] int id)
         {
-            var productInContext = _context.Products.Find(product.Id);
 
-            if (productInContext == null)
+            try
             {
-                return BadRequest();
+
+                var productInContext = _context.Products.Find(product.Id);
+
+                if (productInContext == null)
+                {
+                    return BadRequest("Product not found");
+                }
+                      
+
+                _context.Entry(productInContext).CurrentValues.SetValues(product);
+                if (product.ImageData == null)
+                {
+                    _context.Entry(productInContext).Property(x => x.ImageData).IsModified = false;
+                }
+
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                    return  BadRequest(e);
             }
 
-          
+
+        }
+
+        
+        // POST: api/Products              ===================================      CREATE
+        [HttpPost]
+        public async Task<ActionResult<Product>> PostProduct(Product product)
+        {
             
 
             try
             {
-                _context.Entry(productInContext).CurrentValues.SetValues(product);
-
-
-                //_context.Entry(productInContext).State = EntityState.Modified;
-
-                
+                _context.Products.Add(product);
                 await _context.SaveChangesAsync();
-            }
-            catch (Exception e)
-            {
-                //if (!ProductExists(product.Id))
-                //{
-                //    return NotFound();
-                //}
-                //else
-                {
-                    throw;
-                }
-            }
 
-            return NoContent();
+                return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+
+            }
+            catch {
+                return NotFound();
+            }
+            
+            
+
+            //return CreatedAtAction("GetProduct", new { id = product.Id }, product);
         }
 
-        // POST: api/Products
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
-        {
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
-        }
-
-        // DELETE: api/Products/5
+        // DELETE: api/Products/5         ====================================      DELETE
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
@@ -106,7 +114,7 @@ namespace DomainApi.Controllers
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok();
         }
 
         private bool ProductExists(int id)

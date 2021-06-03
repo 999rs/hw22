@@ -19,20 +19,20 @@ namespace hw20.Controllers
     [Route("Product")]
     public class ProductController : Controller
     {
-        private readonly DataContext _context;
+        //private readonly DataContext _context;
 
         // репозиторий
-        IRepository db;
+        //IRepository db;
 
         /// <summary>
         /// конструктор
         /// </summary>
         /// <param name="context">контекст</param>
-        public ProductController(DataContext context)
-        {
-            _context = context;
-            db = new SQLRepository();
-        }
+        //public ProductController(DataContext context)
+        //{
+        //    //_context = context;
+        //    //db = new SQLRepository();
+        //}
 
         /// <summary>
         /// информация о продукте
@@ -42,9 +42,21 @@ namespace hw20.Controllers
         [Route("ProductAbout/{ProductId:int}")]
         public IActionResult ProductAbout(int ProductId)
         {
-            Product product = _context.Products.Where(p => p.Id == ProductId).FirstOrDefault();
-            ProductViewModel model = new ProductViewModel(product);
-            return View(model);
+            //Product product = _context.Products.Where(p => p.Id == ProductId).FirstOrDefault();
+            Product product = DataApiCalls.Products.GetProductById(ProductId);
+
+
+            //_context.Products.Where(p => p.Id == ProductId).FirstOrDefault();
+            if (product != null)
+            {
+
+                ProductViewModel model = new ProductViewModel(product);
+                return View(model);
+            }
+            else 
+            {
+                return NotFound();
+            }
 
 
         }
@@ -93,13 +105,22 @@ namespace hw20.Controllers
                     try
                     {
                         // пробуем сохранить в базу
-                        //db.Create(formModel.Product);
-                        //db.Save();
+
                         var res = DataApiCalls.Products.Create(formModel.Product);
+
+                        if (res.IsSuccessStatusCode)
+                        {
+                            formModel.Product.Id = int.Parse(res.Headers.Location.Segments[3]);
+                            // загружаем картинку на диск
+                            var folderPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products", $"{formModel.Product.Id}.jpeg");
+                            formModel.Product.DownloadImage(folderPath);
+                        }
+                        else {
+                            Exception ex = new Exception("Апи не вернул новый код продукта");
+                            throw ex;
+                        }
                         
-                        // загружаем картинку на диск
-                        var folderPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products", $"{formModel.Product.Id}.jpg");
-                        formModel.Product.DownloadImage(folderPath);
+                        
                     }
                     catch (Exception e)
                     {
@@ -174,8 +195,11 @@ namespace hw20.Controllers
         {
 
             // сформируем вьюмодель
-            var model = db.GetProduct(ProductId);
+            //var model = db.GetProduct(ProductId);
+            var model = DataApiCalls.Products.GetProductById(ProductId);
             var viewmodel = new ProductViewModel(model);
+            
+
 
             return View(viewmodel);
 
@@ -205,6 +229,7 @@ namespace hw20.Controllers
                     formModel.Product.ImageData = ms.ToArray();
                 }
             }
+            //else { formModel.Product.ImageData = ViewBag.productImage; }
 
 
             if (ModelState.IsValid)
@@ -217,7 +242,7 @@ namespace hw20.Controllers
                     if (rez.IsSuccessStatusCode)
                     { 
                         //скачаем каритнку
-                        var path = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products", $"{formModel.Product.Id}.jpg");
+                        var path = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products", $"{formModel.Product.Id}.jpeg");
 
                         formModel.Product.DownloadImage(path);
                         //db.DownloadImageById(formModel.Product.Id, folderPath);

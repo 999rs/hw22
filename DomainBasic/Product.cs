@@ -16,6 +16,11 @@ namespace DomainBasic
         ///// </summary>        
         //private Guid _FileNameGuid = Guid.NewGuid();
 
+        public Product()
+        {
+            this.ImageData = new byte[0];
+        }
+
 
         /// <summary>
         /// ид продукта

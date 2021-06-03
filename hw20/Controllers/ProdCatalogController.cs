@@ -15,12 +15,12 @@ namespace hw20.Controllers
     /// </summary>
     public class ProdCatalogController : Controller
     {
-        IRepository db;
+        //IRepository db;
 
-        public ProdCatalogController()
-        {
-            db = new SQLRepository();
-        }
+        //public ProdCatalogController()
+        //{
+        //    db = new SQLRepository();
+        //}
 
         /// <summary>
         /// просмотр каталога
@@ -29,7 +29,8 @@ namespace hw20.Controllers
         public ActionResult ProdCatView()
         {
 
-            ProdCatalogViewModel model = new ProdCatalogViewModel(db.GetAllProductList());
+            //ProdCatalogViewModel model = new ProdCatalogViewModel(db.GetAllProductList());
+            ProdCatalogViewModel model = new ProdCatalogViewModel(DataApiCalls.Products.GetAllProducts());
 
             // передадим корзину из сессии в модель для отображения количества (в каталоге)
             model.Cart = HttpContext.Session.Get<Cart>("Cart");
