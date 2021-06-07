@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DataApiCalls\DataApiCalls.csproj" />
     <ProjectReference Include="..\DomainBasic\DomainBasic.csproj" />
   </ItemGroup>
 
