@@ -9,6 +9,7 @@ using System.Text;
 //using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.IO;
 using System.Net.Http.Json;
+using System.Configuration;
 
 namespace hw20
 {
@@ -16,7 +17,10 @@ namespace hw20
     {
         static DataApiCalls() 
         {
-            RootUrl = "http://localhost:2021";
+            RootUrl = System.Configuration.ConfigurationManager.AppSettings["apiUrl"]; //"http://localhost:2021";
+
+            
+
         }
 
         public static string RootUrl { get; set; }
