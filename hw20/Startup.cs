@@ -29,17 +29,9 @@ namespace hw20
         {
             // получаем строку подключения из файла конфигурации
             string connection = Configuration.GetConnectionString("DefaultConnection");
-            // добавляем контекст MobileContext в качестве сервиса в приложение
-
-            //services.AddDbContext<EFRepository.DataContext>(options =>
-            //    options.UseSqlServer(connection));
-            //services.AddDbContext<EFRepository.DataContext>()
-            //
-            //;
-             
-            // ident 22.4   13:18
 
             services.AddControllersWithViews();
+            services.AddRazorPages();
             services.AddDistributedMemoryCache();
             services.AddSession();
         }
@@ -67,8 +59,12 @@ namespace hw20
 
             app.UseAuthorization();
 
+
+                
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute("areas", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
