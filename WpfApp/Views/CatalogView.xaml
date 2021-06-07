@@ -1,0 +1,53 @@
+﻿<Window x:Class="WpfApp.CatalogView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp"
+        mc:Ignorable="d"
+        Title="CatalogView" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Column="1">CATALOG VIEW</TextBlock>
+
+        <ListBox Grid.Row="1" Name="CatalogList" SelectionChanged="prod_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Path=ProductName}"></TextBlock>
+                        <TextBlock Text="{Binding Path=ProductDescription}"></TextBlock>
+
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            
+        </ListBox>
+
+        <StackPanel  Name="ProductDetails" Grid.Row="1" Grid.Column="1" Background="Tan" >
+            
+         
+            <TextBlock Text="{Binding Path=ProductName}"></TextBlock>
+            <TextBlock Text="{Binding Path=ProductDescription}"></TextBlock>
+            <TextBox Text="{Binding Path=ProductName, Mode=TwoWay}"></TextBox>
+            <TextBox Text="{Binding Path=ProductDescription,Mode=TwoWay}"></TextBox>
+            <Button Click="LocalUpdateProductClick" >update on server</Button>
+          
+            
+        </StackPanel>
+        <!--<StackPanel x:Name="ProductDetails" Grid.Row="1" Grid.Column="1" Background="Tan">
+            
+            <TextBlock Text="{Binding Path=ProductName}"></TextBlock>
+            <TextBlock Text="{Binding Path=ProductDescription}"></TextBlock>
+
+        </StackPanel>-->
+
+    </Grid>
+</Window>
