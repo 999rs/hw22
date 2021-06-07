@@ -20,8 +20,19 @@ namespace hw20.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("SecContextConnection")));
 
-                services.AddDefaultIdentity<hw20User>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<SecContext>();
+                //services.AddIdentity<IdentityUser, IdentityRole>()
+                //.AddEntityFrameworkStores<SecContext>()
+                //.AddDefaultTokenProviders();
+
+
+                services.AddDefaultIdentity<hw20User>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    options.SignIn.RequireConfirmedEmail = false;
+                })
+                    .AddEntityFrameworkStores<SecContext>()
+                    .AddDefaultUI()
+                    .AddDefaultTokenProviders();
             });
         }
     }

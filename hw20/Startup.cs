@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EFRepository;
 using System.IO;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace hw20
 {
@@ -30,7 +31,31 @@ namespace hw20
             // получаем строку подключения из файла конфигурации
             string connection = Configuration.GetConnectionString("DefaultConnection");
 
+            //// установка конфигурации подключения
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //        .AddCookie(options => 
+            //        {
+            //            options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Identity/Account/Login");
+            //            options.LogoutPath = new Microsoft.AspNetCore.Http.PathString("/Identity/Account/LogOut");
+            //            //options.
+            //        });
+
+
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings  
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                options.LoginPath = "/Identity/Account/Login"; // If the LoginPath is not set here, ASP.NET Core will default to /Account/Login  
+                options.LogoutPath = "/Identity/Account/Logout"; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout  
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied"; // If the AccessDeniedPath is not set here, ASP.NET Core will default to /Account/AccessDenied  
+                options.SlidingExpiration = true;
+            });
+
+
             services.AddControllersWithViews();
+            services.AddMvc();
             services.AddRazorPages();
             services.AddDistributedMemoryCache();
             services.AddSession();
@@ -57,17 +82,18 @@ namespace hw20
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
                 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
-                endpoints.MapControllerRoute("areas", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                //endpoints.MapControllerRoute("areas", "{area}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
 
             //using (var db = new SQLRepository())

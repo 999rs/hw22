@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EFRepository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace hw20.Controllers
 {
@@ -26,6 +27,7 @@ namespace hw20.Controllers
         /// просмотр каталога
         /// </summary>
         /// <returns></returns>
+        [Authorize]
         public ActionResult ProdCatView()
         {
 
