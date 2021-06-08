@@ -31,15 +31,6 @@ namespace hw20
             // получаем строку подключения из файла конфигурации
             string connection = Configuration.GetConnectionString("DefaultConnection");
 
-            //// установка конфигурации подключения
-            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            //        .AddCookie(options => 
-            //        {
-            //            options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Identity/Account/Login");
-            //            options.LogoutPath = new Microsoft.AspNetCore.Http.PathString("/Identity/Account/LogOut");
-            //            //options.
-            //        });
-
 
 
             services.ConfigureApplicationCookie(options =>
@@ -96,11 +87,6 @@ namespace hw20
                 endpoints.MapRazorPages();
             });
 
-            //using (var db = new SQLRepository())
-            //{
-            //    var folderPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products");
-            //    db.DownloadProdImages(folderPath);
-            //}
 
             // загружаем картинку на диск
             var folderPath2 = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "img", "Products");

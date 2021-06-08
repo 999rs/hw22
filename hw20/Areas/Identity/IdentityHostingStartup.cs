@@ -20,9 +20,6 @@ namespace hw20.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("SecContextConnection")));
 
-                //services.AddIdentity<IdentityUser, IdentityRole>()
-                //.AddEntityFrameworkStores<SecContext>()
-                //.AddDefaultTokenProviders();
 
 
                 services.AddDefaultIdentity<hw20User>(options =>
